@@ -1,0 +1,52 @@
+{
+  "name": "nicomentron",
+  "version": "0.1.0",
+  "description": "comments viewer for live.nicovideo.jp",
+  "main": "app/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint ./src",
+    "build": "npm run build:main && npm run build:renderer",
+    "build:main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/.bin/webpack --config webpack.config.electron.js --progress --profile --colors",
+    "build:renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/.bin/webpack --config webpack.config.production.js --progress --profile --colors",
+    "start": "./node_modules/.bin/electron .",
+    "start:dev": "cross-env NODE_ENV=development electron -r babel-register ./src/main.js",
+    "watch": "cross-env NODE_ENV=development node -r babel-register ./node_modules/.bin/webpack-dev-server --config webpack.config.development.js",
+    "dev": "./node_modules/.bin/npm-run-all -p watch start:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsuwatch/nicomentron.git"
+  },
+  "author": "tsuwatch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsuwatch/nicomentron/issues"
+  },
+  "homepage": "https://github.com/tsuwatch/nicomentron#readme",
+  "dependencies": {
+    "nicolive": "0.0.4",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.0",
+    "babel-eslint": "^7.1.0",
+    "babel-loader": "^6.2.7",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "concurrently": "^3.1.0",
+    "cross-env": "^3.1.3",
+    "electron-prebuilt": "^1.3.8",
+    "eslint": "^3.9.1",
+    "eslint-plugin-react": "^6.5.0",
+    "html-webpack-plugin": "^2.24.1",
+    "npm-run-all": "^3.1.1",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-merge": "^0.15.0"
+  }
+}
