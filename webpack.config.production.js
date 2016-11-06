@@ -17,6 +17,5 @@ export default merge(baseConfig, {
       template: 'src/index.html',
       inject: false
     })
-  ],
-  target: 'electron-renderer'
+  ]
 });

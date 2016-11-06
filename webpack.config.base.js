@@ -7,13 +7,16 @@ export default {
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['', '.js', 'jsx']
+    extensions: ['', '.js']
   },
   module: {
-    loaders: [{
-      test   : /\.jsx?$/,
-      loaders: ['babel-loader'],
-      exclude: /node_modules/
-    }]
-  }
+    loaders: [
+      {
+        test   : /\.js?$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/
+      }
+    ]
+  },
+  externals: ['sqlite3']
 };

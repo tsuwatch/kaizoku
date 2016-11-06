@@ -29,6 +29,5 @@ export default merge(baseConfig, {
     port: port,
     inline: true,
     colors: true
-  },
-  target: 'electron-renderer'
+  }
 });
