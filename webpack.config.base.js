@@ -18,5 +18,8 @@ export default {
       }
     ]
   },
-  externals: ['sqlite3']
+  externals: [
+    'sqlite3',
+    'keytar'
+  ]
 };

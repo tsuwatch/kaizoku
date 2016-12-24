@@ -9,5 +9,6 @@ export default merge(baseConfig, {
   output: {
     path: path.join(__dirname, 'app'),
     filename  : 'main.js',
-  }
+  },
+  target: 'electron'
 });

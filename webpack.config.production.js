@@ -6,15 +6,23 @@ import baseConfig from './webpack.config.base';
 
 export default merge(baseConfig, {
   devtool: 'cheap-module-eval-source-map',
-  entry: ['./src/index'],
+  entry: [
+    index: './src/renderer/index',
+    'login/index': './src/renderer/login/index'
+  ],
   output: {
     path: path.join(__dirname, 'app'),
-    filename  : 'index.js',
+    filename  : '[name].js',
   },
   plugins: [
     new HtmlWebpackPlugin({
+      filename: 'login/index.html',
+      template: 'src/renderer/login/index.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html',
+      template: 'src/renderer/index.html',
       inject: false
     })
   ]

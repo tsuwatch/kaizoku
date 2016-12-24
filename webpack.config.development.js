@@ -10,21 +10,18 @@ export default merge(baseConfig, {
   debug: true,
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: ['./src/index']
+    index: './src/renderer/index',
+    'login/index': './src/renderer/login/index'
   },
   output: {
     path: path.join(__dirname, 'app'),
-    filename  : 'index.js',
+    filename  : '[name].js',
     publicPath: `http://localhost:${port}/`
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/index.html',
-      inject: false
-    })
+    new webpack.HotModuleReplacementPlugin()
   ],
+  target: 'electron-renderer',
   devServer: {
     port: port,
     inline: true,

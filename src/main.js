@@ -1,23 +1,29 @@
-import {app, BrowserWindow} from 'electron';
+import {app} from 'electron';
+import MainWindow from './browser/MainWindow';
 
-let mainWindow = null;
+class Main {
+  constructor() {
+    this.mainWindow = null;
+  }
+
+  onReady() {
+    this.mainWindow = new MainWindow();
+    this.mainWindow.createLoginModal();
+  }
+
+  onWindowAllClosed() {
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+  }
+}
+
+const main = new Main();
 
 app.on('ready', () => {
-  if (mainWindow) return;
-
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-  mainWindow.loadURL(`file://${__dirname}/../src/index.html`);
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  if (process.env.NODE_ENV === 'development') {
-    mainWindow.openDevTools();
-  }
+  main.onReady();
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  main.onWindowAllClosed();
 });
