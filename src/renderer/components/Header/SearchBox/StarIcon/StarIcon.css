@@ -1,0 +1,12 @@
+.container {
+  color: #8F8F8F;
+  padding-left: 15px;
+}
+
+.filled {
+  color: #ffa350;
+}
+
+.star:hover {
+  font-size: 20px;
+}

@@ -1,0 +1,90 @@
+.content {
+  display: flex;
+  padding: 5px;
+}
+
+.selectedContent {
+  display: flex;
+  padding: 5px;
+  background-color: #252525;
+}
+
+.communityIconWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.communityIcon {
+  width: 50px;
+  border-radius: 50px;
+}
+
+.play {
+  margin-top: 10px;
+  color: white;
+}
+
+.play:hover {
+  font-size: 1.2em;
+}
+
+.info {
+  padding-left: 5px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.title {
+  width: 190px;
+  color: white;
+  margin: 0;
+}
+
+.selectedTitle {
+  width: 190px;
+  color: #ffa350;
+  margin: 0;
+
+}
+
+.elapsedTime {
+  color: white;
+  border: 1px solid;
+  border-radius: 10px;
+  width: 80px;
+  height: 20px;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.description {
+  color: #707070;
+  padding: 0 3px;
+  word-break: break-all;
+  font-size: 12px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.countContainer {
+  display: flex;
+  padding-top: 5px;
+}
+
+.countItem {
+  display: flex;
+  align-items: center;
+  color: #8F8F8F;
+  padding-left: 15px;
+}
+
+.icon {
+  padding-right: 5px;
+}

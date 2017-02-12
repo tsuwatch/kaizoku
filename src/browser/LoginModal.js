@@ -1,4 +1,5 @@
 import {BrowserWindow, ipcMain, session} from 'electron';
+import path from 'path';
 
 export default class LoginModal {
   constructor(parent) {
@@ -19,6 +20,7 @@ export default class LoginModal {
     this.window.on('closed', () => this.window = null);
 
     this.ipc.on('RequestSetCookie', ::this._onRequestSetCookie)
+    this.ipc.on('RequestGetCookie', ::this._onRequestGetCookie)
   }
 
   _onRequestSetCookie(e, cookieValue) {
@@ -34,6 +36,13 @@ export default class LoginModal {
       } else {
         this.window.close();
       }
+    }));
+  }
+
+  _onRequestGetCookie(e) {
+    session.defaultSession.cookies.get({ url: 'http://.nicovideo.jp' }, ((err, cookies) => {
+      const cookie = cookies.find(cookie => cookie['name'] === 'user_session')
+      e.returnValue = cookie['value'];
     }));
   }
 }

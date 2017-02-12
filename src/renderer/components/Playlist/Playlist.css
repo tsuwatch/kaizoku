@@ -1,0 +1,30 @@
+.container {
+  width: 350px;
+  min-width: 350px;
+  background-color: #131313;
+  overflow: scroll;
+}
+
+.empty {
+  color: white;
+  text-align: center;
+  font-family: YuGothic, Avenir, Helvetica, Meiryo;
+}
+
+.playlistContent {
+  padding: 0;
+  margin: 0;
+}
+
+.liveContainer {
+  list-style: none;
+  cursor: default;
+  border-bottom: 1px solid;
+  border-color: #1E1E1E;
+  font-family: YuGothic, Avenir, Helvetica, Meiryo;
+  line-height: 1.5;
+}
+
+.liveContainer:hover {
+  background: #424242;
+}

@@ -11,7 +11,7 @@
         const script = document.createElement('script');
         const port = process.env.PORT || 3000;
         script.src = process.env.NODE_ENV === 'development' ?
-          'http://localhost:' + port + '/login/index.js' : 'login/index.js';
+          'http://localhost:' + port + '/login/index.js' : 'index.js';
         document.write(script.outerHTML);
       }
     </script>

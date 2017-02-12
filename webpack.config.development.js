@@ -23,6 +23,7 @@ export default merge(baseConfig, {
   ],
   target: 'electron-renderer',
   devServer: {
+    hot: true,
     port: port,
     inline: true,
     colors: true

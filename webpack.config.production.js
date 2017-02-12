@@ -6,10 +6,10 @@ import baseConfig from './webpack.config.base';
 
 export default merge(baseConfig, {
   devtool: 'cheap-module-eval-source-map',
-  entry: [
-    index: './src/renderer/index',
-    'login/index': './src/renderer/login/index'
-  ],
+  entry: {
+    index: './src/renderer/index.js',
+    'login/index': './src/renderer/login/index.js'
+  },
   output: {
     path: path.join(__dirname, 'app'),
     filename  : '[name].js',
@@ -25,5 +25,6 @@ export default merge(baseConfig, {
       template: 'src/renderer/index.html',
       inject: false
     })
-  ]
+  ],
+  target: 'electron-renderer'
 });

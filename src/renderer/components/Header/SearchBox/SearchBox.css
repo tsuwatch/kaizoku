@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.selectType {
+  border: none;
+  border-radius: 25px 0 0 25px;
+  -webkit-appearance: none;
+  height: 25px;
+  padding: 0 10px;
+  outline: none;
+}
+
+.selectSort {
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  height: 25px;
+  padding: 0 10px;
+  outline: none;
+}
+
+.search {
+  outline: none;
+  border-radius: 0 25px 25px 0;
+  border: none;
+  min-height: 25px;
+  padding: 5px 10px;
+}

@@ -1,0 +1,9 @@
+.container {
+  color: #8F8F8F;
+  margin: 0 15px;
+}
+
+.container:hover {
+  color: white;
+  font-size: 18px;
+}

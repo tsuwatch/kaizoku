@@ -13,10 +13,10 @@ export default class App extends React.Component {
     const sessionExtractor = new SessionExtractor();
     sessionExtractor.extract()
       .then((sessionId) => {
-        console.log(sessionId);
         this.ipc.send('RequestSetCookie', sessionId);
       })
       .catch((err) => {
+        alert('ログイン情報が存在しません');
       });
   }
 

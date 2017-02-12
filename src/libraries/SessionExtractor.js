@@ -31,11 +31,12 @@ export default class SessionExtractor {
   getEncryptedUserSession() {
     return new Promise((resolve, reject) => {
       this.db.get("SELECT * FROM cookies WHERE host_key = '.nicovideo.jp' AND name = 'user_session'", (err, row) => {
-        if (err) {
+        if (err || !row) {
           reject(err);
           return;
         }
 
+        console.log(row);
         resolve(row.encrypted_value);
       });
     });

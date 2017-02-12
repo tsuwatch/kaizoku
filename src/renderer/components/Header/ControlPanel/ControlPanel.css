@@ -1,0 +1,15 @@
+.container {
+  color: #8F8F8F;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.item {
+  margin: 0 20px;
+}
+
+.item:hover {
+  color: white;
+  font-size: 14px;
+}
