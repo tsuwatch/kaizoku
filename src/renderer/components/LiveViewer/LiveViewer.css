@@ -37,6 +37,7 @@
   padding: 0 5px;
   overflow: scroll;
   max-height: 200px;
+  line-height: 1.5;
 }
 
 .description {
@@ -44,6 +45,7 @@
   padding: 0 5px;
   opacity: .5;
   overflow: hidden;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
