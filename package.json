@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint ./src",
     "package": "NODE_ENV=production ./node_modules/.bin/electron-packager . nicomentron --platform=darwin --arch=x64 --out=packages --overwrite",
+    "zip": "cd packages && zip -r nicomentron-darwin-x64.zip nicomentron-darwin-x64",
     "electron-rebuild": "./node_modules/.bin/electron-rebuild sqlite3 keytar",
     "build": "npm run build:main && npm run build:renderer",
     "build:main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/.bin/webpack --config webpack.config.electron.js --progress --profile --colors",
