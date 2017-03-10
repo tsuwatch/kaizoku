@@ -1,6 +1,6 @@
 import React from 'react';
 import {ipcRenderer} from 'electron';
-import SessionExtractor from '../../../libraries/SessionExtractor';
+import SessionExtractor from '../../libraries/SessionExtractor';
 
 export default class App extends React.Component {
   constructor(props) {
