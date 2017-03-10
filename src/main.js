@@ -1,6 +1,7 @@
 import {app} from 'electron';
 import path from 'path';
 import MainWindow from './browser/MainWindow';
+import ApplicationMenu from './browser/ApplicationMenu';
 
 class Main {
   constructor() {
@@ -27,6 +28,7 @@ class Main {
   onReady() {
     this.mainWindow = new MainWindow();
     this.mainWindow.createLoginModal();
+    new ApplicationMenu(this.mainWindow.window);
   }
 
   onWindowAllClosed() {

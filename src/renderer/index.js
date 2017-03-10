@@ -1,16 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Context, Dispatcher} from 'almin';
+import {ipcRenderer} from 'electron';
 import App from './components/App';
 import AppLocator from './AppLocator';
 import AppStoreGroup from './stores/AppStoreGroup';
 import InitializeDomainUseCase from './use-cases/InitializeDomainUseCase';
+import RefreshPlaylistUseCase from './use-cases/RefreshPlaylistUseCase';
 
-AppLocator.context = new Context({
-  dispatcher: new Dispatcher(),
-  store: AppStoreGroup.create()
-});
+class Application {
+  run() {
+    this.render();
+    this.subscribeIpcEvents();
+  }
 
-AppLocator.context.useCase(InitializeDomainUseCase.create()).execute().then(() => {
-  ReactDOM.render(<App appContext={AppLocator.context} />, document.getElementById('root'));
-});
+  subscribeIpcEvents() {
+    ipcRenderer.on('reload', () => AppLocator.context.useCase(RefreshPlaylistUseCase.create()).execute());
+    ipcRenderer.on('search', () => document.getElementsByTagName('input')[0].focus());
+  }
+
+  render() {
+    AppLocator.context = new Context({
+      dispatcher: new Dispatcher(),
+      store: AppStoreGroup.create()
+    });
+    
+    AppLocator.context.useCase(InitializeDomainUseCase.create()).execute().then(() => {
+      ReactDOM.render(<App appContext={AppLocator.context} />, document.getElementById('root'));
+    });
+  }
+}
+
+new Application().run();
