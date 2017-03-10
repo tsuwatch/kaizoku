@@ -8,5 +8,5 @@
 }
 
 .star:hover {
-  font-size: 20px;
+  -webkit-transform: scale(1.2);
 }

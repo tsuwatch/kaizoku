@@ -5,5 +5,5 @@
 
 .container:hover {
   color: white;
-  font-size: 18px;
+  -webkit-transform: scale(1.2);
 }

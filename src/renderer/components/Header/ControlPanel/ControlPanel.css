@@ -11,5 +11,5 @@
 
 .item:hover {
   color: white;
-  font-size: 14px;
+  -webkit-transform: scale(1.2);
 }
