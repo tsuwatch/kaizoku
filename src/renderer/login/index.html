@@ -12,7 +12,7 @@
         const port = process.env.PORT || 3000;
         script.src = process.env.NODE_ENV === 'development' ?
           'http://localhost:' + port + '/login/index.js' : 'index.js';
-        document.write(script.outerHTML);
+        document.getElementById('root').appendChild(script);
       }
     </script>
   </body>

@@ -30,9 +30,9 @@ export default class LoginModal {
       value: cookieValue
     }
 
-    session.defaultSession.cookies.set(cookie, ((err) => {
+    session.defaultSession.cookies.set(cookie, (err => {
       if (err) {
-        alert(err);
+        console.log(err);
       } else {
         this.window.close();
       }
