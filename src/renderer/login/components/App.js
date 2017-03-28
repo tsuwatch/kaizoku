@@ -29,7 +29,7 @@ export default class App extends React.Component {
     const browser = event.target.value;
     if (browser) {
       this.setState({
-        browser: event.target.value,
+        browser,
         email: '',
         password: ''
       });
@@ -42,21 +42,12 @@ export default class App extends React.Component {
     if (this.state.browser) {
       const sessionExtractor = new SessionExtractor();
       sessionExtractor.extract()
-        .then(sessionId => {
-          this.ipc.send('RequestSetCookie', sessionId);
-        })
-        .catch(err => {
-          alert('ログイン情報が存在しません');
-        });
+        .then(sessionId => this.ipc.send('RequestSetCookie', sessionId))
+        .catch(err => alert('ログイン情報が存在しません'));
     } else {
       nicolive.login({email: this.state.email, password: this.state.password})
-        .then(client => {
-          console.log(client.cookie.split('=')[1]);
-          this.ipc.send('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, ''));
-        })
-        .catch(err => {
-          alert('ログインに失敗しました');
-        });
+        .then(client => this.ipc.send('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, '')))
+        .catch(err => alert('ログインに失敗しました'));
     }
   }
 
