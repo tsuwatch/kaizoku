@@ -32,3 +32,6 @@
     - Windows
       - [ ] Google Chrome
       - and more...
+- [ ] アプリ名
+- [ ] ロゴ
+- [ ] ランディングページ
