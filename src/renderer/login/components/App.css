@@ -86,6 +86,7 @@
 }
 
 .button {
+  outline: none;
   margin-top: 10px;
   border-radius: 16px;
   padding: 8px 36px;
@@ -98,6 +99,7 @@
 }
 
 .button:hover {
+  outline: none;
   background-color: #ffb26c;
   -webkit-transform: scale(1.1);
 }

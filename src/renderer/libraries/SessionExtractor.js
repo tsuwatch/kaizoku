@@ -1,3 +1,4 @@
+import fs from 'fs';
 import sqlite3 from 'sqlite3';
 import path from 'path';
 import keytar from 'keytar';
@@ -5,8 +6,10 @@ import crypto from 'crypto';
 
 export default class SessionExtractor {
   constructor() {
-    const dbPath = path.resolve(path.join(process.env.HOME, 'Library/Application Support/Google/Chrome/Default/Cookies'));
-    this.db = new sqlite3.Database(dbPath);
+    const dbPathBase = path.resolve(path.join(process.env.HOME, 'Library/Application Support/Google/Chrome'));
+    let dbPath = `${dbPathBase}/Default`;
+    if (!fs.statSync(dbPath).isDirectory) dbPath = `${dbPathBase}/Profile 1`;
+    this.db = new sqlite3.Database(`${dbPath}/Cookies`);
   }
 
   extract() {
