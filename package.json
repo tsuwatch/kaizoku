@@ -33,7 +33,6 @@
     "electron-window-state": "^4.0.0",
     "font-awesome": "^4.7.0",
     "keytar": "^3.0.2",
-    "nicolive": "tsuwatch/nicolive#feature/cookie-option-prepublished",
     "nicolive-api": "^0.2.3",
     "niconico-search": "^0.2.0",
     "react": "^15.3.2",

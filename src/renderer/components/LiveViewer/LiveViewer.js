@@ -1,7 +1,7 @@
 import React from 'react';
 import {ipcRenderer} from 'electron';
 import fa from 'font-awesome/css/font-awesome.css';
-import nicolive from 'nicolive';
+import NicoliveAPI from 'nicolive-api';
 import cheerio from 'cheerio';
 import styles from './LiveViewer.css';
 import AppLocator from '../../AppLocator';
@@ -16,6 +16,8 @@ export default class LiveViewer extends React.Component {
       isExpandedDescription: false,
       intervalId: null
     };
+
+    this.client = new NicoliveAPI(`user_session=${ipcRenderer.sendSync('RequestGetCookie')}`);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,20 +33,16 @@ export default class LiveViewer extends React.Component {
       if (process.env.NODE_ENV === 'development') wv.openDevTools();
     });
     wv.addEventListener('did-finish-load', () => {
-      nicolive.getPlayerStatus(nextProps.item.id, { cookie: `user_session=${ipcRenderer.sendSync('RequestGetCookie')}` }, ((err, body, status) => {
-        if (err) {
-          AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward');
-        } else {
-          this.setState({intervalId: setInterval(() => this.checkLiveStatus(nextProps.item.id), 3 * 60 * 1000)});
-        }
-      }));
+      this.client.getPlayerStatus(nextProps.item.id)
+        .then(() => this.setState({intervalId: setInterval(() => this.checkLiveStatus(nextProps.item.id), 3 * 60 * 1000)}))
+        .catch(() => AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward'))
     });
   }
 
   checkLiveStatus(id) {
-    nicolive.getPlayerStatus(id, { cookie: `user_session=${ipcRenderer.sendSync('RequestGetCookie')}` }, ((err, body, status) => {
-      if (err) AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward');
-    }));
+    this.client.getPlayerStatus(id)
+      .then(() => {})
+      .catch(() => AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward'));
   }
 
   toggleExpandDescription(isExpandedDescription) {
