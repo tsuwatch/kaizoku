@@ -1,5 +1,4 @@
 import {BrowserWindow, ipcMain, session} from 'electron';
-import path from 'path';
 
 export default class LoginModal {
   constructor(parent) {
@@ -32,7 +31,7 @@ export default class LoginModal {
 
     session.defaultSession.cookies.set(cookie, (err => {
       if (err) {
-        console.log(err);
+        e.sender.send('error', err);
       } else {
         this.window.close();
       }

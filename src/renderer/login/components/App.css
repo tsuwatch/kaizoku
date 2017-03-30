@@ -6,8 +6,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  color: white;
-  padding: 10px;
+  color: #a0a0a0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,47 +28,76 @@
 
 .formLabel {
   padding-right: 15px;
-  text-align: right;
-  width: 120px;
 }
 
 .input {
-  border: 1px solid #ccc;
+  background-color: #333;
+  border: none;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .075);
   padding: 6px 12px;
   height: 20px;
   width: 250px;
-  color: #555;
+  color: white;
   font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  background-color: #444;
 }
 
 .input:disabled {
-  background-color: #eee;
-  opacity: 1;
+  opacity: .7;
   cursor: not-allowed;
 }
 
-.select {
-  border: 1px solid #ccc;
+.selectBox {
+  position: relative;
   height: 34px;
   font-size: 14px;
-  width: 274px;
+  border-radius: 4px;
+}
+
+.selectBox:after {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  bottom: 0;
+
+  width: 0;
+  height: 0;
+  margin: auto;
+
+  content: '';
+
+  border-top: 4px solid #999;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.select {
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 6px 36px 6px 24px;
+  border-radius: 4px;
 }
 
 .button {
-  border-radius: 4px;
-  padding: 6px 12px;
-  font-size: 14px;
-  border: 1px solid transparent;
+  margin-top: 10px;
+  border-radius: 16px;
+  padding: 8px 36px;
+  font-size: 12px;
+  border: none;
   cursor: pointer;
-  color: #333;
-  background-color: white;
-  border-color: #ccc;
+  color: white;
+  background-color: #ffa350;
+  transition-duration: .1s;
 }
 
 .button:hover {
-  border-color: #adadad;
-  background-color: #e6e6e6;
-  color: #333;
+  background-color: #ffb26c;
+  -webkit-transform: scale(1.1);
 }
