@@ -32,7 +32,7 @@ export default class Sidebar extends React.Component {
           onClick={() => ::this.handleSearch(condition)}
         >
           {this.isSelectedItem(condition) ? (<span className={styles.border} />) : null}
-          {`${condition.word}`}
+          <span>{`${condition.word}`}</span>
         </li>
       )
     })

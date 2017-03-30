@@ -23,6 +23,6 @@ export default class Live {
     this.scoreTimeshiftReserved = scoreTimeshiftReserved;
     this.categoryTags = categoryTags;
     this.tags = tags;
-    this.url = communityIcon !== '' ? `http://live.nicovideo.jp/watch/${this.id}` : `http://live2.nicovideo.jp/watch/${this.id}`
+    this.url = `http://live.nicovideo.jp/watch/${this.id}`;
   }
 }

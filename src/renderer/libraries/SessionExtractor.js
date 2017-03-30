@@ -36,7 +36,6 @@ export default class SessionExtractor {
           return;
         }
 
-        console.log(row);
         resolve(row.encrypted_value);
       });
     });

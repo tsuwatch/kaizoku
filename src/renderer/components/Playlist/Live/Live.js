@@ -49,7 +49,6 @@ export default class Live extends React.Component {
         onClick={::this.handleStop}
         onMouseEnter={() => ::this.toggleMouseOverPlay(true)}
         onMouseLeave={() => ::this.toggleMouseOverPlay(false)}
-        onClick={::this.handleStop}
       />
     );
     if (this.state.onMouseOver) return (<i className={`${fa.fa} ${fa['fa-play']} ${styles.play}`} />);

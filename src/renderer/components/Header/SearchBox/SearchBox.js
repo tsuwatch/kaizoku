@@ -1,5 +1,4 @@
 import React from 'react';
-import fa from 'font-awesome/css/font-awesome.css';
 import StarIcon from './StarIcon/StarIcon';
 import AppLocator from '../../../AppLocator';
 import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';

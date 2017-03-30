@@ -7,6 +7,10 @@
   color: #ffa350;
 }
 
+.start {
+  transition-duration: .1s;
+}
+
 .star:hover {
-  -webkit-transform: scale(1.2);
+  -webkit-transform: scale(1.1);
 }

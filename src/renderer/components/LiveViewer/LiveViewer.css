@@ -11,14 +11,15 @@
   flex-wrap: wrap;
   flex-direction: column;
   color: white;
-  border-bottom: 2px solid;
-  border-color: #ffa350;
+  border-bottom: 1px solid;
+  border-color: #424242;
 }
 
 .tagsContainer {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  padding: 5px;
 }
 
 .tag {
@@ -33,6 +34,7 @@
 }
 
 .expandedDescription {
+  color: #cecece;
   font-family: YuGothic, Avenir, Helvetica, Meiryo;
   padding: 0 5px;
   overflow: scroll;
@@ -41,9 +43,9 @@
 }
 
 .description {
+  color: #bdbdbd;
   font-family: YuGothic, Avenir, Helvetica, Meiryo;
   padding: 0 5px;
-  opacity: .5;
   overflow: hidden;
   line-height: 1.5;
   display: -webkit-box;

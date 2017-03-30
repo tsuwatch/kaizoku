@@ -9,6 +9,10 @@ import SearchLiveUseCase from '../../use-cases/SearchLiveUseCase';
 import ControlPlayerUseCase from '../../use-cases/ControlPlayerUseCase';
 
 export default class LiveViewer extends React.Component {
+  static propTypes = {
+    item: React.PropTypes.object
+  };
+
   constructor() {
     super();
 

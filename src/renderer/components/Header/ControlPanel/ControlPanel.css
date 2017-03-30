@@ -7,9 +7,10 @@
 
 .item {
   margin: 0 20px;
+  transition-duration: .1s;
 }
 
 .item:hover {
   color: white;
-  -webkit-transform: scale(1.2);
+  -webkit-transform: scale(1.1);
 }

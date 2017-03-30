@@ -3,6 +3,10 @@ import Live from './Live/Live';
 import styles from './Playlist.css';
 
 export default class Playlist extends React.Component {
+  static propTypes = {
+    playlist: React.PropTypes.object.isRequired
+  };
+
   renderItems() {
     const {playlist} = this.props;
 
