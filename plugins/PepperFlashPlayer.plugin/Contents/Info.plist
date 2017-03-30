@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>14F2009</string>
+	<string>14F2109</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en_US</string>
 	<key>CFBundleExecutable</key>
 	<string>PepperFlashPlayer</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Adobe Flash Player 24.0 r0 Copyright (c) 1996-2017 Adobe Systems Incorporated. All rights reserved</string>
+	<string>Adobe Flash Player 25.0 r0 Copyright (c) 1996-2017 Adobe Systems Incorporated. All rights reserved</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.macromedia.PepperFlashPlayer.pepper</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>BRPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>24.0.0.194</string>
+	<string>25.0.0.127</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -27,7 +27,7 @@
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>24.0.0.194</string>
+	<string>25.0.0.127</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>
