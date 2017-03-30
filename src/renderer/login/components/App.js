@@ -54,6 +54,29 @@ export default class App extends React.Component {
     }
   }
 
+  renderCookieLogin() {
+    if (process.platform !== 'darwin') return null;
+
+    return (
+      <div>
+        <p>またはブラウザのCookieを使用する</p>
+        <div className={styles.formGroup}>
+          <div className={styles.selectBox}>
+            <select
+              id="browser"
+              className={styles.select}
+              value={this.state.browser}
+              onChange={::this.handleChangeBrowser}
+            >
+              <option value=""></option>
+              <option value="chrome">Google Chrome</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const {
       browser,
@@ -90,20 +113,7 @@ export default class App extends React.Component {
                 onChange={::this.handleInputPassword}
               />
             </div>
-            <p>またはブラウザのCookieを使用する</p>
-            <div className={styles.formGroup}>
-              <div className={styles.selectBox}>
-                <select
-                  id="browser"
-                  className={styles.select}
-                  value={browser}
-                  onChange={::this.handleChangeBrowser}
-                >
-                  <option value=""></option>
-                  <option value="chrome">Google Chrome</option>
-                </select>
-              </div>
-            </div>
+            {this.renderCookieLogin()}
             <div className={styles.formGroup}>
               <button
                 type="submit"
