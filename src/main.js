@@ -22,7 +22,7 @@ class Main {
         break;
     }
     app.commandLine.appendSwitch('ppapi-flash-path', `${path.join(__dirname)}/../plugins/${pluginName}`);
-    app.commandLine.appendSwitch('ppapi-flash-version', '24.0.0.194')
+    app.commandLine.appendSwitch('ppapi-flash-version', '25.0.0.127')
   }
 
   onReady() {

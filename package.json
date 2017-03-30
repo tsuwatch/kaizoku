@@ -4,7 +4,6 @@
   "description": "comments viewer for live.nicovideo.jp",
   "main": "app/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint ./src",
     "package": "NODE_ENV=production ./node_modules/.bin/electron-packager . nicomentron --platform=darwin --arch=x64 --out=packages --overwrite",
     "zip": "cd packages && zip -r nicomentron-darwin-x64.zip nicomentron-darwin-x64",
