@@ -32,6 +32,7 @@ export default class LoginModal {
     session.defaultSession.cookies.set(cookie, (err => {
       if (err) {
         e.sender.send('error', err);
+        e.returnValue = err;
       } else {
         this.window.close();
       }
