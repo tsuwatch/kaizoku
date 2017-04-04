@@ -1,14 +1,13 @@
 import React from 'react';
-import nicolive from 'nicolive-api';
-import {ipcRenderer} from 'electron';
-import SessionExtractor from '../../libraries/SessionExtractor';
+import AppLocator from '../../AppLocator';
+import EmailLoginUseCase from '../../use-cases/EmailLoginUseCase';
+import CookieLoginUseCase from '../../use-cases/CookieLoginUseCase';
 import styles from './App.css';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.ipc = ipcRenderer;
     this.state = {
       email: "",
       password: "",
@@ -40,16 +39,13 @@ export default class App extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.browser) {
-      const sessionExtractor = new SessionExtractor();
-      sessionExtractor.extract()
-        .then(sessionId => this.ipc.send('RequestSetCookie', sessionId))
+      AppLocator.context.useCase(CookieLoginUseCase.create()).execute()
         .catch(() => {
           this.setState({browser: ''});
           alert('ログイン情報の取得に失敗しました');
         });
     } else {
-      nicolive.login({email: this.state.email, password: this.state.password})
-        .then(client => this.ipc.send('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, '')))
+      AppLocator.context.useCase(EmailLoginUseCase.create()).execute({email: this.state.email, password: this.state.password})
         .catch(() => alert('ログインに失敗しました'));
     }
   }
