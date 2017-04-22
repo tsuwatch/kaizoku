@@ -1,7 +1,5 @@
 import React from 'react';
 import AppLocator from '../../AppLocator';
-import EmailLoginUseCase from '../../use-cases/EmailLoginUseCase';
-import CookieLoginUseCase from '../../use-cases/CookieLoginUseCase';
 import styles from './App.css';
 
 export default class App extends React.Component {
@@ -39,13 +37,17 @@ export default class App extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.browser) {
-      AppLocator.context.useCase(CookieLoginUseCase.create()).execute()
+      const sessionExtractor = new SessionExtractor();
+
+      sessionExtractor.extract()
+        .then(sessionId => ipcRenderer.send('RequestSetCookie', sessionId, windowId))
         .catch(() => {
           this.setState({browser: ''});
           alert('ログイン情報の取得に失敗しました');
         });
     } else {
-      AppLocator.context.useCase(EmailLoginUseCase.create()).execute({email: this.state.email, password: this.state.password})
+      nicolive.login({email: this.state.email, password: this.state.password})
+        .then(client => this.ipc.send('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, ''), windowId))
         .catch(() => alert('ログインに失敗しました'));
     }
   }
