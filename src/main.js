@@ -1,11 +1,10 @@
 import {app} from 'electron';
 import path from 'path';
-import MainWindow from './browser/MainWindow';
-import ApplicationMenu from './browser/ApplicationMenu';
+import Application from './browser/Application';
 
 class Main {
   constructor() {
-    this.mainWindow = null;
+    this.application = null;
   }
 
   loadFlashPlugin() {
@@ -21,14 +20,14 @@ class Main {
         pluginName = 'libpepflashplayer.so';
         break;
     }
+
     app.commandLine.appendSwitch('ppapi-flash-path', `${path.join(__dirname)}/../plugins/${pluginName}`);
-    app.commandLine.appendSwitch('ppapi-flash-version', '25.0.0.127')
+    app.commandLine.appendSwitch('ppapi-flash-version', '25.0.0.127');
   }
 
   onReady() {
-    this.mainWindow = new MainWindow();
-    this.mainWindow.createLoginModal();
-    new ApplicationMenu(this.mainWindow.window);
+    this.application = new Application();
+    this.application.launch();
   }
 
   onWindowAllClosed() {
@@ -39,7 +38,6 @@ class Main {
 }
 
 const main = new Main();
-
 main.loadFlashPlugin();
 
 app.on('ready', () => {

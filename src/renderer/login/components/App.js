@@ -1,11 +1,14 @@
 import React from 'react';
-import AppLocator from '../../AppLocator';
+import nicolive from 'nicolive-api';
+import {ipcRenderer} from 'electron';
+import SessionExtractor from '../../libraries/SessionExtractor';
 import styles from './App.css';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ipc = ipcRenderer;
     this.state = {
       email: "",
       password: "",
@@ -36,6 +39,7 @@ export default class App extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const windowId = Number(window.location.hash.replace('#', ''));
     if (this.state.browser) {
       const sessionExtractor = new SessionExtractor();
 
