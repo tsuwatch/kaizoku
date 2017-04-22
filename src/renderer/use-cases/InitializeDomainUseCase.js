@@ -26,7 +26,7 @@ export default class InitializeDomainUseCase extends UseCase {
     const playlist = new Playlist();
     const searchBox = new SearchBox();
 
-    const data = ipcRenderer.sendSync('restore', 'favorite');
+    const data = ipcRenderer.sendSync('RequestRestore', 'favorite');
     const favorite = new Favorite({'_items': data ? data._items : []});
 
     this.playlistRepository.save(playlist);

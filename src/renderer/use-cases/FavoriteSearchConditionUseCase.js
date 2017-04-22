@@ -24,7 +24,7 @@ export default class FavoriteSearchConditionUseCase extends UseCase {
     } else {
       favorite.remove(searchBox);
     }
-    ipcRenderer.send('store', { name: 'favorite', data: favorite});
+    ipcRenderer.send('RequestStore', { name: 'favorite', data: favorite});
     this.favoriteRepository.save(favorite);
   }
 }

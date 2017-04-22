@@ -20,8 +20,17 @@ export default class LiveViewer extends React.Component {
       isExpandedDescription: false,
       intervalId: null
     };
+    this.client = null;
+  }
 
-    this.client = new NicoliveAPI(`user_session=${ipcRenderer.sendSync('RequestGetCookie')}`);
+  componentDidMount() {
+    const cookie = ipcRenderer.sendSync('RequestGetCookie');
+    const windowId = Number(window.location.hash.replace('#', ''));
+    if (!cookie) {
+      ipcRenderer.send('RequestOpenLoginModal', windowId);
+      return;
+    }
+    this.client = new NicoliveAPI(`user_session=${cookie}`);
   }
 
   componentWillReceiveProps(nextProps) {
