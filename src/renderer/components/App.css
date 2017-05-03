@@ -85,6 +85,10 @@
   border-radius: 4px;
 }
 
+.disabledCheckbox {
+  cursor: not-allowed;
+}
+
 .button {
   outline: none;
   margin-top: 10px;

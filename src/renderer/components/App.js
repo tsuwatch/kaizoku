@@ -2,7 +2,9 @@ import React from 'react';
 import nicolive from 'nicolive-api';
 import {ipcRenderer} from 'electron';
 import LiveViewer from './LiveViewer/App';
+import AppLocator from '../AppLocator';
 import SessionExtractor from '../libraries/SessionExtractor';
+import AlertJumpUseCase from '../use-cases/AlertJumpUseCase.js';
 import styles from './App.css';
 
 export default class App extends React.Component {
@@ -10,7 +12,9 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      mode: null,
+      mode: 'LiveViewer',
+      alert: false,
+      loggedIn: false,
       email: '',
       password: '',
       browser: ''
@@ -38,6 +42,10 @@ export default class App extends React.Component {
     }
   }
 
+  handleChangeAlert(event) {
+    this.setState({alert: event.target.checked});
+  }
+
   handleSubmit(event) {
     event.preventDefault();
 
@@ -46,8 +54,8 @@ export default class App extends React.Component {
 
       sessionExtractor.extract()
         .then(sessionId => {
-          ipcRenderer.sendSync('RequestSetCookie', sessionId);
-          this.setState({mode: 'LiveViewer'});
+          const loggedIn = ipcRenderer.sendSync('RequestSetCookie', sessionId);
+          if (loggedIn === true) this.setState({loggedIn});
         })
         .catch(() => {
           this.setState({browser: ''});
@@ -56,11 +64,47 @@ export default class App extends React.Component {
     } else {
       nicolive.login({email: this.state.email, password: this.state.password})
         .then(client => {
-          ipcRenderer.sendSync('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, ''));
-          this.setState({mode: 'LiveViewer'});
+          const loggedIn = ipcRenderer.sendSync('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, ''));
+          if (loggedIn === true) {
+            if (this.state.alert) this.connectAlert(client);
+            this.setState({loggedIn});
+          }
          })
         .catch(() => alert('ログインに失敗しました'));
     }
+  }
+
+  connectAlert(client) {
+    client.connectAlert().then(viewer => {
+      viewer.connection.on('error', () => alert('ニコ生アラートが停止しました'));
+      viewer.connection.on('notify', (info => {
+        const notification = new Notification(
+          `${info.title} - ${info.name}`,
+          {
+            body: info.description,
+            icon: info.thumbnail
+          }
+        );
+        notification.onclick = () => AppLocator.context.useCase(AlertJumpUseCase.create()).execute(info);
+      }));
+    });
+  }
+
+  renderAlertCheckbox() {
+    const {browser} = this.state;
+    const canAlert = !browser;
+
+    return (
+      <div>
+        <label className={canAlert ? '' : styles.disabledCheckbox}>
+          <input
+            type="checkbox"
+            onChange={::this.handleChangeAlert}
+            disabled={!canAlert}
+          /> 番組の開始を通知する
+        </label>
+      </div>
+    );
   }
 
   renderCookieLogin() {
@@ -123,6 +167,7 @@ export default class App extends React.Component {
               />
             </div>
             {this.renderCookieLogin()}
+            {this.renderAlertCheckbox()}
             <div className={styles.formGroup}>
               <button
                 type="submit"
@@ -139,10 +184,15 @@ export default class App extends React.Component {
   }
 
   renderApplication() {
-    const {mode} = this.state;
+    const {
+      mode,
+      loggedIn
+    } = this.state;
 
-    if (mode === 'LiveViewer') {
-      return (<LiveViewer />)
+    if (loggedIn) {
+      if (mode === 'LiveViewer') {
+        return (<LiveViewer />)
+      }
     } else {
       return this.renderLogin()
     }
@@ -150,9 +200,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.renderApplication()}
-      </div>
+      <div>{this.renderApplication()}</div>
     );
   }
 }

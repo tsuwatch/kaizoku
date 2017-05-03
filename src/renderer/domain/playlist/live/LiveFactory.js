@@ -16,4 +16,20 @@ export default class LiveFactory {
       tags: data['tags']
     });
   }
+
+  static createWithAlertData(data) {
+    return new Live({
+      id: data.contentId,
+      title: data.title,
+      description: data.description,
+      startTime: (new Date()).toISOString(),
+      communityIcon: data.thumbnail,
+      thumbnailUrl: null,
+      commentCounter: '-',
+      viewCounter: '-',
+      scoreTimeshiftReserved: '-',
+      categoryTags: '',
+      tags: ''
+    });
+  }
 }
