@@ -1,6 +1,6 @@
 import React from 'react';
-import AppLocator from '../../AppLocator';
-import SearchLiveUseCase from '../../use-cases/SearchLiveUseCase';
+import AppLocator from '../../../AppLocator';
+import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
 import styles from './Sidebar.css';
 
 export default class Sidebar extends React.Component {

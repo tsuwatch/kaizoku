@@ -50,7 +50,7 @@ export default class Application {
     w.createLoginModal();
   }
 
-  _onRequestSetCookie(e, cookieValue, windowId) {
+  _onRequestSetCookie(e, cookieValue, windowId = null) {
     const cookie = {
       url: 'http://.nicovideo.jp',
       name: 'user_session',
@@ -60,7 +60,9 @@ export default class Application {
     session.defaultSession.cookies.set(cookie, (err => {
       if (err) {
         e.sender.send('error', err);
+        e.returnValue = err;
       } else {
+        e.returnValue = true;
         if (windowId) this.windows.get(windowId).closeLoginModal();
       }
     }));

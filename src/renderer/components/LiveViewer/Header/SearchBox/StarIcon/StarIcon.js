@@ -1,7 +1,7 @@
 import React from 'react';
 import fa from 'font-awesome/css/font-awesome.css';
-import AppLocator from '../../../../AppLocator';
-import FavoriteSearchConditionUseCase from '../../../../use-cases/FavoriteSearchConditionUseCase';
+import AppLocator from '../../../../../AppLocator';
+import FavoriteSearchConditionUseCase from '../../../../../use-cases/FavoriteSearchConditionUseCase';
 import styles from './StarIcon.css';
 
 export default class StarIcon extends React.Component {

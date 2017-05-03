@@ -1,7 +1,7 @@
 import React from 'react';
 import fa from 'font-awesome/css/font-awesome.css';
-import AppLocator from '../../../AppLocator';
-import ControlPlayerUseCase from '../../../use-cases/ControlPlayerUseCase';
+import AppLocator from '../../../../AppLocator';
+import ControlPlayerUseCase from '../../../../use-cases/ControlPlayerUseCase';
 import styles from './ControlPanel.css';
 
 export default class ControlPanel extends React.Component {
