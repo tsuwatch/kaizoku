@@ -40,10 +40,5 @@ class Main {
 const main = new Main();
 main.loadFlashPlugin();
 
-app.on('ready', () => {
-  main.onReady();
-});
-
-app.on('window-all-closed', () => {
-  main.onWindowAllClosed();
-});
+app.on('ready', () => main.onReady());
+app.on('window-all-closed', () => main.onWindowAllClosed());

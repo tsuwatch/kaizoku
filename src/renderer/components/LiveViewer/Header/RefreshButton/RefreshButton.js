@@ -1,7 +1,7 @@
 import React from 'react';
 import fa from 'font-awesome/css/font-awesome.css';
-import AppLocator from '../../../AppLocator';
-import RefreshPlaylistUseCase from '../../../use-cases/RefreshPlaylistUseCase';
+import AppLocator from '../../../../AppLocator';
+import RefreshPlaylistUseCase from '../../../../use-cases/RefreshPlaylistUseCase';
 import styles from './RefreshButton.css';
 
 export default class RefreshButton extends React.Component {

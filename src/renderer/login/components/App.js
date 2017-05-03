@@ -8,7 +8,6 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.ipc = ipcRenderer;
     this.state = {
       email: "",
       password: "",
@@ -51,7 +50,7 @@ export default class App extends React.Component {
         });
     } else {
       nicolive.login({email: this.state.email, password: this.state.password})
-        .then(client => this.ipc.send('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, ''), windowId))
+        .then(client => ipcRenderer.send('RequestSetCookie', client.cookie.split('=')[1].replace(/;/, ''), windowId))
         .catch(() => alert('ログインに失敗しました'));
     }
   }

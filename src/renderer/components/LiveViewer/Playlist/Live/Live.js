@@ -2,8 +2,8 @@ import React from 'react';
 import cheerio from 'cheerio';
 import fa from 'font-awesome/css/font-awesome.css';
 import styles from './Live.css';
-import AppLocator from '../../../AppLocator';
-import ControlPlayerUseCase from '../../../use-cases/ControlPlayerUseCase.js';
+import AppLocator from '../../../../AppLocator';
+import ControlPlayerUseCase from '../../../../use-cases/ControlPlayerUseCase.js';
 
 export default class Live extends React.Component {
   static propTypes = {

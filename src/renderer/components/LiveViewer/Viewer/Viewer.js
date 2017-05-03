@@ -3,10 +3,10 @@ import {ipcRenderer} from 'electron';
 import fa from 'font-awesome/css/font-awesome.css';
 import NicoliveAPI from 'nicolive-api';
 import cheerio from 'cheerio';
-import styles from './LiveViewer.css';
-import AppLocator from '../../AppLocator';
-import SearchLiveUseCase from '../../use-cases/SearchLiveUseCase';
-import ControlPlayerUseCase from '../../use-cases/ControlPlayerUseCase';
+import styles from './Viewer.css';
+import AppLocator from '../../../AppLocator';
+import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
+import ControlPlayerUseCase from '../../../use-cases/ControlPlayerUseCase';
 
 export default class LiveViewer extends React.Component {
   static propTypes = {

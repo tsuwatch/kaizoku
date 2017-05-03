@@ -1,7 +1,7 @@
 import React from 'react';
 import StarIcon from './StarIcon/StarIcon';
-import AppLocator from '../../../AppLocator';
-import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
+import AppLocator from '../../../../AppLocator';
+import SearchLiveUseCase from '../../../../use-cases/SearchLiveUseCase';
 import styles from './SearchBox.css';
 
 export default class SearchBox extends React.Component {
