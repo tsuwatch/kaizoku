@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .content {
   display: flex;
   padding: 5px;

@@ -34,9 +34,12 @@ export default class SearchLiveUseCase extends UseCase {
     this.searchBoxRepository.save(searchBox);
 
     this.client.search(searchBox.word, options).then(response => {
-      const items = response.data.data.map(data => {
+      const resultItems = response.data.data.map(data => {
         return LiveFactory.createWithApiData(data);
       });
+      const pinnedItems = playlist.items.filter(item => item.pinned === true);
+      const filteredItems = resultItems.filter(item => !pinnedItems.map(item => item.id).includes(item.id));
+      const items = [...pinnedItems, ...filteredItems];
       if (playlist.currentItem() && !items.find(item => item.id === playlist.currentItemId)) items.unshift(playlist.currentItem());
       playlist.items = items;
       searchBox.isRequesting = false;
