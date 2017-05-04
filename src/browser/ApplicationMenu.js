@@ -29,8 +29,7 @@ export default class ApplicationMenu {
             accelerator: 'CmdOrCtrl+R',
             click() { mainWindow.webContents.send('reload') }
           },
-          process.env.NODE_ENV === 'development' ? { role: 'toggledevtools' } : {},
-          { type: 'separator' },
+          process.env.NODE_ENV === 'development' ? { role: 'toggledevtools' } : { type: 'separator' },
           { role: 'togglefullscreen' }
         ]
       },
