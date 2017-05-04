@@ -1,0 +1,14 @@
+.container {
+  position: absolute;
+  left: 3px;
+  transition-duration: .1s;
+  color: #ffa350;
+}
+
+.container:hover {
+  -webkit-transform: scale(1.1);
+}
+
+.filled {
+  color: #ffa350;
+}
