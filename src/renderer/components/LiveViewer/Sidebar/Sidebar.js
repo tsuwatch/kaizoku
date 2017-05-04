@@ -5,21 +5,13 @@ import styles from './Sidebar.css';
 
 export default class Sidebar extends React.Component {
   static propTypes = {
+    searchBox: React.PropTypes.object.isRequired,
     favorite: React.PropTypes.object.isRequired
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      selectedItem: null
-    };
-  }
-
   isSelectedItem(item) {
-    const {selectedItem} = this.state;
-    if (!selectedItem) return false;
-    return !!(selectedItem.word === item.word && selectedItem.type === item.type);
+    const {searchBox} = this.props;
+    return !!(searchBox.word === item.word && searchBox.type === item.type);
   }
 
   renderItems(type) {
@@ -39,7 +31,6 @@ export default class Sidebar extends React.Component {
   }
 
   handleSearch(selectedItem) {
-    this.setState({selectedItem})
     AppLocator.context.useCase(SearchLiveUseCase.create()).execute({
       word: selectedItem.word,
       type: selectedItem.type,

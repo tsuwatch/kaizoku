@@ -32,7 +32,10 @@ export default class App extends React.Component {
           favorite={favorite}
         />
         <div className={styles.container}>
-          <Sidebar favorite={favorite} />
+          <Sidebar
+            favorite={favorite}
+            searchBox={searchBox}
+          />
           <Playlist playlist={playlist} />
           <Viewer item={playlist.currentItem} />
         </div>
