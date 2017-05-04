@@ -57,7 +57,7 @@
 }
 
 .elapsedTime {
-  color: white;
+  color: #838383;
   border: 1px solid;
   border-radius: 10px;
   width: 80px;
@@ -67,7 +67,7 @@
 }
 
 .description {
-  color: #707070;
+  color: #838383;
   padding: 0 3px;
   word-break: break-all;
   font-size: 12px;
