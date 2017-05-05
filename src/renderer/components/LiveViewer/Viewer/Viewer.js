@@ -21,13 +21,13 @@ export default class LiveViewer extends React.Component {
       intervalId: null
     };
     this.client = null;
+    this.windowId = Number(window.location.hash.replace('#', ''));
   }
 
   componentDidMount() {
     const cookie = ipcRenderer.sendSync('RequestGetCookie');
-    const windowId = Number(window.location.hash.replace('#', ''));
     if (!cookie) {
-      ipcRenderer.send('RequestOpenLoginModal', windowId);
+      ipcRenderer.send('RequestOpenLoginModal', this.windowId);
       return;
     }
     this.client = new NicoliveAPI(`user_session=${cookie}`);
@@ -48,14 +48,27 @@ export default class LiveViewer extends React.Component {
     wv.addEventListener('did-finish-load', () => {
       this.client.getPlayerStatus(nextProps.item.id)
         .then(() => this.setState({intervalId: setInterval(() => this.checkLiveStatus(nextProps.item.id), 3 * 60 * 1000)}))
-        .catch(() => AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward'))
+        .catch(err => {
+          if (err === 'notlogin') {
+            ipcRenderer.send('RequestOpenLoginModal', this.windowId);
+          } else {
+            AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward');
+          }
+        });
     });
   }
 
   checkLiveStatus(id) {
     this.client.getPlayerStatus(id)
       .then(() => {})
-      .catch(() => AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward'));
+      .catch(err => {
+        if (err === 'notlogin') {
+          clearInterval(this.state.intervalId);
+          ipcRenderer.send('RequestOpenLoginModal', this.windowId);
+        } else {
+          AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward');
+        }
+      });
   }
 
   toggleExpandDescription(isExpandedDescription) {
@@ -69,6 +82,20 @@ export default class LiveViewer extends React.Component {
     })
   }
 
+  renderTags() {
+    return this.props.item.tags.split(/\s/).map((tag, i) => {
+      return (
+        <p
+          key={i}
+          className={styles.tag}
+          onClick={() => ::this.handleSearchTag(tag)}
+        >
+          {tag}
+        </p>
+      );
+    });
+  }
+
   renderHeader() {
     const {item} = this.props;
     const {isExpandedDescription} = this.state;
@@ -78,19 +105,7 @@ export default class LiveViewer extends React.Component {
       <div className={styles.webviewHeader}>
         <div className={styles.tagsContainer}>
           <i className={`${fa.fa} ${fa['fa-tags']}`} />
-          {
-            item.tags.split(/\s/).map((tag, i) => {
-              return (
-                <p
-                  key={i}
-                  className={styles.tag}
-                  onClick={() => ::this.handleSearchTag(tag)}
-                >
-                  {tag}
-                </p>
-              )
-            })
-          }
+          {this.renderTags()}
         </div>
         <span className={isExpandedDescription ? styles.expandedDescription : styles.description}>{cheerio.load(item.description).text()}</span>
         <div className={styles.expand}>
