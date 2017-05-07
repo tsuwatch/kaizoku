@@ -23,6 +23,7 @@ export default class SearchLiveUseCase extends UseCase {
     searchBox.word = word;
     searchBox.type = type;
     searchBox.sort = sort ? sort : searchBox.sort;
+    searchBox.mode = 'search';
     if (!searchBox.word) return;
 
     const options = {

@@ -6,7 +6,7 @@ export default class LiveFactory {
       id: data['contentId'],
       title: data['title'],
       description: data['description'],
-      startTime: data['startTime'],
+      startTime: Date.parse(data['startTime']),
       communityIcon: data['communityIcon'],
       thumbnailUrl: data['thumbnailUrl'],
       commentCounter: data['commentCounter'],
@@ -22,8 +22,24 @@ export default class LiveFactory {
       id: data.contentId,
       title: data.title,
       description: data.description,
-      startTime: (new Date()).toISOString(),
+      startTime: Date.now(),
       communityIcon: data.thumbnail,
+      thumbnailUrl: null,
+      commentCounter: '-',
+      viewCounter: '-',
+      scoreTimeshiftReserved: '-',
+      categoryTags: '',
+      tags: ''
+    });
+  }
+
+  static createWithMyPageData(data) {
+    return new Live({
+      id: data.id,
+      title: data.title,
+      description: '',
+      startTime: null,
+      communityIcon: data.communityIcon,
       thumbnailUrl: null,
       commentCounter: '-',
       viewCounter: '-',

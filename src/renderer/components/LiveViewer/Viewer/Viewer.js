@@ -7,6 +7,7 @@ import styles from './Viewer.css';
 import AppLocator from '../../../AppLocator';
 import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
 import ControlPlayerUseCase from '../../../use-cases/ControlPlayerUseCase';
+import UpdateLiveUseCase from '../../../use-cases/UpdateLiveUseCase';
 
 export default class LiveViewer extends React.Component {
   static propTypes = {
@@ -47,7 +48,10 @@ export default class LiveViewer extends React.Component {
     });
     wv.addEventListener('did-finish-load', () => {
       this.client.getPlayerStatus(nextProps.item.id)
-        .then(() => this.setState({intervalId: setInterval(() => this.checkLiveStatus(nextProps.item.id), 3 * 60 * 1000)}))
+        .then(status => {
+          this.setState({intervalId: setInterval(() => this.checkLiveStatus(nextProps.item.id), 3 * 60 * 1000)})
+          AppLocator.context.useCase(UpdateLiveUseCase.create()).execute(nextProps.item.id, status)
+        })
         .catch(err => {
           if (err === 'notlogin') {
             ipcRenderer.send('RequestOpenLoginModal', this.windowId);
@@ -60,7 +64,7 @@ export default class LiveViewer extends React.Component {
 
   checkLiveStatus(id) {
     this.client.getPlayerStatus(id)
-      .then(() => {})
+      .then(status => AppLocator.context.useCase(UpdateLiveUseCase.create()).execute(id, status))
       .catch(err => {
         if (err === 'notlogin') {
           clearInterval(this.state.intervalId);

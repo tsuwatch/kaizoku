@@ -43,6 +43,14 @@ export default class Live extends React.Component {
     return `${fa.fa} ${fa['fa-volume-up']} ${styles.play}`;
   }
 
+  renderElapsedTime() {
+    const {item} = this.props;
+    const diff = item.startTime ? new Date(Date.now() - item.startTime) : null;
+
+    if (diff) return diff.getUTCHours() === 0 ? `${diff.getUTCMinutes()}分` : `${diff.getUTCHours()}時間${diff.getUTCMinutes()}分`
+    return ' - 分';
+  }
+
   renderPinIcon() {
     const {item} = this.props;
 
@@ -71,7 +79,6 @@ export default class Live extends React.Component {
 
   render() {
     const {item, selected} = this.props;
-    const diff = new Date(Date.now() - Date.parse(item.startTime));
 
     return (
       <div
@@ -94,7 +101,7 @@ export default class Live extends React.Component {
           <div className={styles.info}>
             <div className={styles.header}>
               <p className={selected ? styles.selectedTitle : styles.title}>{item.title}</p>
-              <span className={styles.elapsedTime}>{diff.getUTCHours() === 0 ? '' : `${diff.getUTCHours()}時間`}{`${diff.getUTCMinutes()}分`}</span>
+              <span className={styles.elapsedTime}>{this.renderElapsedTime()}</span>
             </div>
             <span className={styles.description}>{cheerio.load(item.description).text().trim()}</span>
             <div className={styles.countContainer}>
