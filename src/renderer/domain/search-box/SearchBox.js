@@ -5,7 +5,8 @@ export default class SearchBox {
     this._id = uuid();
     this._word = '';
     this._type = 'word';
-    this._sort= '-startTime';
+    this._sort = '-startTime';
+    this._mode = 'search';
     this._isRequesting = false;
   }
 
@@ -19,6 +20,10 @@ export default class SearchBox {
 
   get sort() {
     return this._sort;
+  }
+
+  get mode() {
+    return this._mode;
   }
 
   get isRequesting() {
@@ -35,6 +40,10 @@ export default class SearchBox {
 
   set sort(sort) {
     this._sort = sort;
+  }
+
+  set mode(mode) {
+    this._mode = mode;
   }
 
   set isRequesting(isRequesting) {

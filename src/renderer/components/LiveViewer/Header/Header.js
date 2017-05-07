@@ -16,7 +16,7 @@ export default class Header extends React.Component {
 
     return (
       <div className={styles.container}>
-        <RefreshButton isRequesting={searchBox.isRequesting} />
+        <RefreshButton searchBox={searchBox} />
         <SearchBox
           searchBox={searchBox}
           favorite={favorite}

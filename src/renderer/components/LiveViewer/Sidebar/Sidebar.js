@@ -1,6 +1,7 @@
 import React from 'react';
 import AppLocator from '../../../AppLocator';
 import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
+import ViewMyPageUseCase from '../../../use-cases/ViewMyPageUseCase';
 import styles from './Sidebar.css';
 
 export default class Sidebar extends React.Component {
@@ -11,7 +12,7 @@ export default class Sidebar extends React.Component {
 
   isSelectedItem(item) {
     const {searchBox} = this.props;
-    return !!(searchBox.word === item.word && searchBox.type === item.type);
+    return !!(searchBox.mode === 'search' && searchBox.word === item.word && searchBox.type === item.type);
   }
 
   renderItems(type) {
@@ -23,11 +24,15 @@ export default class Sidebar extends React.Component {
           className={this.isSelectedItem(condition) ? styles.selectedItem :  styles.item}
           onClick={() => ::this.handleSearch(condition)}
         >
-          {this.isSelectedItem(condition) ? (<span className={styles.border} />) : null}
+          {this.isSelectedItem(condition) ? (<span className={styles.itemBorder} />) : null}
           <span>{`${condition.word}`}</span>
         </li>
       )
     })
+  }
+
+  handleViewMyPage() {
+    AppLocator.context.useCase(ViewMyPageUseCase.create()).execute();
   }
 
   handleSearch(selectedItem) {
@@ -39,13 +44,22 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
+    const {searchBox} = this.props;
+
     return (
       <div className={styles.container}>
-        <span>キーワード</span>
+        <div
+          className={searchBox.mode === 'my' ? styles.selectedMenu : styles.menu}
+          onClick={::this.handleViewMyPage}
+        >
+          {searchBox.mode === 'my' ? (<span className={styles.menuBorder} />) : null}
+          <span>マイページ</span>
+        </div>
+        <div className={styles.menuHeader}>キーワード</div>
         <ul className={styles.list}>
           {this.renderItems('word')}
         </ul>
-        <span>タグ</span>
+        <div className={styles.menuHeader}>タグ</div>
         <ul className={styles.list}>
           {this.renderItems('tag')}
         </ul>
