@@ -54,7 +54,7 @@
   width: 190px;
   color: #ffa350;
   margin: 0;
-
+  word-break: break-all;
 }
 
 .elapsedTime {
