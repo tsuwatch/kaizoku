@@ -18,7 +18,7 @@ export default class UpdateLiveUseCase extends UseCase {
     const live = playlist.items[index];
     live.title = status.title;
     live.description = status.description;
-    live.startTime = status.open_time;
+    live.startTime = Number(`${status.open_time}000`);
     live.commentCounter = status.comment_count;
     live.viewCounter = status.watch_count;
     playlist.items[index] = live;
