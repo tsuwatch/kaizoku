@@ -47,6 +47,7 @@
   width: 190px;
   color: white;
   margin: 0;
+  word-break: break-all;
 }
 
 .selectedTitle {
