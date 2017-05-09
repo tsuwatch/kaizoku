@@ -1,10 +1,16 @@
-.container {
+.button {
   color: #8F8F8F;
   margin: 0 15px;
   transition-duration: .1s;
 }
 
-.container:hover {
+.hoverButton {
+  color: #8F8F8F;
+  margin: 0 15px;
+  transition-duration: .1s;
+}
+
+.hoverButton:hover {
   color: white;
   -webkit-transform: scale(1.1);
 }

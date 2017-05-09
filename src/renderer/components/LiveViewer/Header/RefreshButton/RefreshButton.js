@@ -24,11 +24,22 @@ export default class RefreshButton extends React.Component {
 
   render() {
     return (
-      <i
-        className={`${fa.fa} ${fa['fa-refresh']} ${fa['fa-lg']} ${styles.container} ${this.props.searchBox.isRequesting? `${fa['fa-spin']}` : ''}`}
-        title="更新"
-        onClick={::this.handleRefresh}
-      />
+      <div>
+        {
+          this.props.searchBox.isRequesting ? (
+            <i
+              className={`${fa.fa} ${fa['fa-refresh']} ${fa['fa-lg']} ${fa['fa-spin']} ${styles.button}`}
+              title="更新"
+            />
+          ) : (
+            <i
+              className={`${fa.fa} ${fa['fa-refresh']} ${fa['fa-lg']} ${styles.hoverButton}`}
+              title="更新"
+              onClick={::this.handleRefresh}
+            />
+          )
+        }
+      </div>
     );
   }
 }
