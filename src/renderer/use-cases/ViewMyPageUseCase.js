@@ -34,34 +34,50 @@ export default class ViewMyPageUseCase extends UseCase {
     searchBox.mode = 'my';
     this.searchBoxRepository.save(searchBox);
 
-    request({
-      url: 'http://live.nicovideo.jp/my',
-      headers: {
-        cookie: `user_session=${ipcRenderer.sendSync('RequestGetCookie')}`
-      }
-    }, (err, res, body) => {
-      const $ = cheerio.load(body);
-      const favoriteList = $('#Favorite_list');
+    return this._fetch()
+      .then(body => {
+        const $ = cheerio.load(body);
+        const favoriteList = $('#Favorite_list');
 
-      const liveItems = favoriteList.find('#subscribeItemsWrap').children('.liveItems').children();
-      const items = liveItems.map((i, el) => {
-        return LiveFactory.createWithMyPageData(this.extractData($(el)));
-      });
-
-      const liveItemsList = favoriteList.find('#all_subscribeItemsWrap').children('.liveItems');
-      const itemsList = liveItemsList.map((i, el) => {
-        return $(el).children().map((j, el2) => {
-          return LiveFactory.createWithMyPageData(this.extractData($(el2)));
+        const liveItems = favoriteList.find('#subscribeItemsWrap').children('.liveItems').children();
+        const items = liveItems.map((i, el) => {
+          return LiveFactory.createWithMyPageData(this.extractData($(el)));
         });
-      });
-      const items2 = itemsList.toArray().reduce((a, b) => {
-        return a.toArray().concat(b.toArray());
-      });
 
-      playlist.items = [...items, ...items2];
-      this.playlistRepository.save(playlist);
-      searchBox.isRequesting = false;
-      this.searchBoxRepository.save(searchBox);
+        const liveItemsList = favoriteList.find('#all_subscribeItemsWrap').children('.liveItems');
+        const itemsList = liveItemsList.map((i, el) => {
+          return $(el).children().map((j, el2) => {
+            return LiveFactory.createWithMyPageData(this.extractData($(el2)));
+          });
+        });
+        const items2 = itemsList.toArray().reduce((a, b) => {
+          return a.toArray().concat(b.toArray());
+        });
+
+        playlist.items = [...items, ...items2];
+        this.playlistRepository.save(playlist);
+        searchBox.isRequesting = false;
+        this.searchBoxRepository.save(searchBox);
+      })
+      .catch(err => {
+        searchBox.isRequesting = false;
+        this.searchBoxRepository.save(searchBox);
+        return Promise.reject(err)
+      });
+  }
+
+  _fetch() {
+    return new Promise((resolve, reject) => {
+      request({
+        url: 'http://live.nicovideo.jp/my',
+        headers: {
+          cookie: `user_session=${ipcRenderer.sendSync('RequestGetCookie')}`
+        }
+      }, (err, res, body) => {
+        if (err) return reject(err);
+        if (res.headers['x-niconico-authflag'] === '0') return reject('notlogin');
+        resolve(body);
+      });
     });
   }
 }

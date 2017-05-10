@@ -1,4 +1,5 @@
 import React from 'react';
+import {ipcRenderer} from 'electron';
 import AppLocator from '../../../AppLocator';
 import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
 import ViewMyPageUseCase from '../../../use-cases/ViewMyPageUseCase';
@@ -32,7 +33,9 @@ export default class Sidebar extends React.Component {
   }
 
   handleViewMyPage() {
-    AppLocator.context.useCase(ViewMyPageUseCase.create()).execute();
+    AppLocator.context.useCase(ViewMyPageUseCase.create()).execute().catch(err => {
+      if (err === 'notlogin') ipcRenderer.send('RequestOpenLoginModal', Number(window.location.hash.replace('#', '')));
+    });
   }
 
   handleSearch(selectedItem) {
