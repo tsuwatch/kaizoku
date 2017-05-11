@@ -44,15 +44,18 @@ export default class ViewMyPageUseCase extends UseCase {
           return LiveFactory.createWithMyPageData(this.extractData($(el)));
         });
 
+        let items2 = [];
         const liveItemsList = favoriteList.find('#all_subscribeItemsWrap').children('.liveItems');
-        const itemsList = liveItemsList.map((i, el) => {
-          return $(el).children().map((j, el2) => {
-            return LiveFactory.createWithMyPageData(this.extractData($(el2)));
+        if (liveItemsList.length) {
+          const itemsList = liveItemsList.map((i, el) => {
+            return $(el).children().map((j, el2) => {
+              return LiveFactory.createWithMyPageData(this.extractData($(el2)));
+            });
           });
-        });
-        const items2 = itemsList.toArray().reduce((a, b) => {
-          return a.toArray().concat(b.toArray());
-        });
+          items2 = itemsList.toArray().reduce((a, b) => {
+            return a.toArray().concat(b.toArray());
+          });
+        }
 
         playlist.items = [...items, ...items2];
         this.playlistRepository.save(playlist);
@@ -62,7 +65,7 @@ export default class ViewMyPageUseCase extends UseCase {
       .catch(err => {
         searchBox.isRequesting = false;
         this.searchBoxRepository.save(searchBox);
-        return Promise.reject(err)
+        return Promise.reject(err);
       });
   }
 
