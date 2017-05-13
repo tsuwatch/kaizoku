@@ -1,11 +1,9 @@
 import React from 'react';
 import {ipcRenderer} from 'electron';
-import fa from 'font-awesome/css/font-awesome.css';
 import NicoliveAPI from 'nicolive-api';
-import cheerio from 'cheerio';
+import Header from './Header/Header';
 import styles from './Viewer.css';
 import AppLocator from '../../../AppLocator';
-import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
 import ControlPlayerUseCase from '../../../use-cases/ControlPlayerUseCase';
 import UpdateLiveUseCase from '../../../use-cases/UpdateLiveUseCase';
 
@@ -18,20 +16,10 @@ export default class LiveViewer extends React.Component {
     super();
 
     this.state = {
-      isExpandedDescription: false,
       intervalId: null
     };
-    this.client = null;
+    this.client = new NicoliveAPI(`user_session=${ipcRenderer.sendSync('RequestGetCookie')}`);
     this.windowId = Number(window.location.hash.replace('#', ''));
-  }
-
-  componentDidMount() {
-    const cookie = ipcRenderer.sendSync('RequestGetCookie');
-    if (!cookie) {
-      ipcRenderer.send('RequestOpenLoginModal', this.windowId);
-      return;
-    }
-    this.client = new NicoliveAPI(`user_session=${cookie}`);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,58 +63,10 @@ export default class LiveViewer extends React.Component {
       });
   }
 
-  toggleExpandDescription(isExpandedDescription) {
-    this.setState({isExpandedDescription});
-  }
-
-  handleSearchTag(tag) {
-    AppLocator.context.useCase(SearchLiveUseCase.create()).execute({
-      word: tag,
-      type: 'tag'
-    })
-  }
-
-  renderTags() {
-    return this.props.item.tags.split(/\s/).map((tag, i) => {
-      return (
-        <p
-          key={i}
-          className={styles.tag}
-          onClick={() => ::this.handleSearchTag(tag)}
-        >
-          {tag}
-        </p>
-      );
-    });
-  }
-
-  renderHeader() {
-    const {item} = this.props;
-    const {isExpandedDescription} = this.state;
-
-    if (!item) return null;
-    return (
-      <div className={styles.webviewHeader}>
-        <div className={styles.tagsContainer}>
-          <i className={`${fa.fa} ${fa['fa-tags']}`} />
-          {this.renderTags()}
-        </div>
-        <span className={isExpandedDescription ? styles.expandedDescription : styles.description}>{cheerio.load(item.description).text()}</span>
-        <div className={styles.expand}>
-          {
-            isExpandedDescription ? (
-              <span onClick={() => ::this.toggleExpandDescription(false)}><i className={`${fa.fa} ${fa['fa-chevron-up']}`} /> 説明文を閉じる</span>
-            ) : <span onClick={() => ::this.toggleExpandDescription(true)}><i className={`${fa.fa} ${fa['fa-chevron-down']}`} /> 説明文を開く</span>
-          }
-        </div>
-      </div>
-    );
-  }
-
   render() {
     return (
       <div className={styles.container}>
-        {this.renderHeader()}
+        {this.props.item ? (<Header item={this.props.item} />) : null}
         <div
           id="webview"
           className={styles.webviewContainer}
