@@ -5,61 +5,6 @@
   background-color: #252525;
 }
 
-.webviewHeader {
-  padding: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  color: white;
-  border-bottom: 1px solid;
-  border-color: #424242;
-}
-
-.tagsContainer {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 5px;
-}
-
-.tag {
-  margin: 0 5px;
-  font-family: YuGothic, Avenir, Helvetica, Meiryo;
-  cursor: pointer;
-}
-
-.tag:hover {
-  opacity: .7;
-  text-decoration: underline;
-}
-
-.expandedDescription {
-  color: #dcdcdc;
-  font-family: YuGothic, Avenir, Helvetica, Meiryo;
-  padding: 0 5px;
-  overflow: scroll;
-  max-height: 200px;
-  line-height: 1.5;
-}
-
-.description {
-  color: #838383;
-  font-family: YuGothic, Avenir, Helvetica, Meiryo;
-  padding: 0 5px;
-  overflow: hidden;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.expand {
-  padding-top: 5px;
-  margin: 0 auto;
-  font-family: YuGothic, Avenir, Helvetica, Meiryo;
-  cursor: pointer;
-}
-
 .webviewContainer {
   flex: 1;
 }
