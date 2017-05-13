@@ -1,7 +1,7 @@
 # Nicomentron
 ニコニコ生放送デスクトップクライアント（ニコニコ生放送ビューア兼、コメントビューア）
 
-- [Download preview version for Mac (Chrome only)](https://github.com/tsuwatch/nicomentron/releases/download/v0.3.1/nicomentron-darwin-x64.zip)
+- [Download preview version for Mac (Chrome only)](https://github.com/tsuwatch/nicomentron/releases/download/v0.3.2/nicomentron-darwin-x64.zip)
   - Only live viewer
 
 ![](/screenshots/preview.png)

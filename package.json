@@ -1,6 +1,6 @@
 {
   "name": "nicomentron",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "comments viewer for live.nicovideo.jp",
   "main": "app/main.js",
   "scripts": {
