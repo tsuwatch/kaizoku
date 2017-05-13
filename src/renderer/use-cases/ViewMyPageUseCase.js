@@ -53,7 +53,9 @@ export default class ViewMyPageUseCase extends UseCase {
             });
           });
           items2 = itemsList.toArray().reduce((a, b) => {
-            return a.toArray().concat(b.toArray());
+            const aArray = Array.isArray(a) ? a : a.toArray();
+            const bArray = Array.isArray(b) ? b : b.toArray();
+            return aArray.concat(bArray);
           });
         }
 
