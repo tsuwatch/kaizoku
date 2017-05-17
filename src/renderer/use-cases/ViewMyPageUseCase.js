@@ -40,7 +40,7 @@ export default class ViewMyPageUseCase extends UseCase {
         const favoriteList = $('#Favorite_list');
 
         const liveItems = favoriteList.find('#subscribeItemsWrap').children('.liveItems').children();
-        const items = liveItems.map((i, el) => {
+        const items1 = liveItems.map((i, el) => {
           return LiveFactory.createWithMyPageData(this.extractData($(el)));
         });
 
@@ -59,7 +59,10 @@ export default class ViewMyPageUseCase extends UseCase {
           });
         }
 
-        playlist.items = [...items, ...items2];
+        const filteredItems = [...items1, ...items2].filter(item => !playlist.pinnedItems().map(item => item.id).includes(item.id));
+        const items = [...playlist.pinnedItems(), ...filteredItems];
+        if (playlist.currentItem() && !items.find(item => item.id === playlist.currentItemId)) items.unshift(playlist.currentItem());
+        playlist.items = items;
         this.playlistRepository.save(playlist);
         searchBox.isRequesting = false;
         this.searchBoxRepository.save(searchBox);

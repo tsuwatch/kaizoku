@@ -27,6 +27,10 @@ export default class Playlist {
     return this.items.find(item => item.id === this.currentItemId);
   }
 
+  pinnedItems() {
+    return this.items.filter(item => item.pinned === true);
+  }
+
   play(itemId) {
     if (this.items.length === 0) return;
     this._currentItemId = itemId ? itemId : this.items[0].id;
