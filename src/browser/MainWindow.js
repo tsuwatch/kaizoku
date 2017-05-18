@@ -8,6 +8,7 @@ export default class MainWindow {
     const windowState = windowStateKeeper();
 
     this.window = new BrowserWindow({
+      titleBarStyle: 'hidden',
       minWidth: 600,
       minHeight: 400,
       webPreferences: {
