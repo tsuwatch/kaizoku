@@ -16,7 +16,10 @@ export default class LiveViewer extends React.Component {
     super();
 
     this.state = {
-      intervalId: null
+      intervalId: null,
+      mouseX: null,
+      mouseY: null,
+      isDisplayOverlay: false
     };
     this.client = null;
     this.windowId = Number(window.location.hash.replace('#', ''));
@@ -65,10 +68,37 @@ export default class LiveViewer extends React.Component {
       });
   }
 
+  handleMouseMove(e) {
+    const mouseX = e.pageX;
+    const mouseY = e.pageY;
+
+    this.setState({
+      isDisplayOverlay: true,
+      mouseX,
+      mouseY
+    });
+
+    setTimeout(() => {
+      if (this.state.mouseX === mouseX && this.state.mouseY === mouseY) {
+        this.setState({isDisplayOverlay: false});
+      } else {
+        this.setState({isDisplayOverlay: true});
+      }
+    }, 3000);
+  }
+
+  handleMouseLeave() {
+    this.setState({isEnter: false});
+  }
+
   render() {
     return (
-      <div className={styles.container}>
-        {this.props.item ? (<Header item={this.props.item} />) : null}
+      <div
+        className={styles.container}
+        onMouseMove={::this.handleMouseMove}
+        onMouseLeave={::this.handleMouseLeave}
+      >
+        {this.props.item && this.state.isDisplayOverlay ? (<Header item={this.props.item} />) : null}
         <div
           id="webview"
           className={styles.webviewContainer}
