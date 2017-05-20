@@ -18,13 +18,14 @@ export default class LiveViewer extends React.Component {
     this.state = {
       intervalId: null
     };
-    this.client = new NicoliveAPI(`user_session=${ipcRenderer.sendSync('RequestGetCookie')}`);
+    this.client = null;
     this.windowId = Number(window.location.hash.replace('#', ''));
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.item && nextProps.item && this.props.item.id == nextProps.item.id) return;
     clearInterval(this.state.intervalId);
+    this.client = new NicoliveAPI(`user_session=${ipcRenderer.sendSync('RequestGetCookie')}`);
 
     const {webview} = this.refs;
     webview.innerHTML = '<webview style="width: 100%; height: 100%;" />'
@@ -42,6 +43,7 @@ export default class LiveViewer extends React.Component {
         })
         .catch(err => {
           if (err === 'notlogin') {
+            AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('stop');
             ipcRenderer.send('RequestOpenLoginModal', this.windowId);
           } else {
             AppLocator.context.useCase(ControlPlayerUseCase.create()).execute('forward');
