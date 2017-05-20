@@ -9,6 +9,7 @@ export default class MainWindow {
 
     this.window = new BrowserWindow({
       titleBarStyle: 'hidden',
+      backgroundColor: '#252525',
       minWidth: 600,
       minHeight: 400,
       webPreferences: {
