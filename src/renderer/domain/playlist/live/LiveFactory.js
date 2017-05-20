@@ -48,4 +48,20 @@ export default class LiveFactory {
       tags: ''
     });
   }
+
+  static createWithRankingData(data) {
+    return new Live({
+      id: data.id,
+      title: data.title,
+      description: '',
+      startTime: null,
+      communityIcon: data.communityIcon,
+      thumbnailUrl: null,
+      commentCounter: data.commentCounter,
+      viewCounter: data.viewCounter,
+      scoreTimeshiftReserved: '-',
+      categoryTags: '',
+      tags: ''
+    });
+  }
 }

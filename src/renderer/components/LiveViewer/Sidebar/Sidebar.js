@@ -3,12 +3,19 @@ import {ipcRenderer} from 'electron';
 import AppLocator from '../../../AppLocator';
 import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
 import ViewMyPageUseCase from '../../../use-cases/ViewMyPageUseCase';
+import ViewRankingUseCase from '../../../use-cases/ViewRankingUseCase';
 import styles from './Sidebar.css';
 
 export default class Sidebar extends React.Component {
   static propTypes = {
     searchBox: React.PropTypes.object.isRequired,
     favorite: React.PropTypes.object.isRequired
+  }
+
+  constructor() {
+    super();
+
+    this.windowId = Number(window.location.hash.replace('#', ''));
   }
 
   isSelectedItem(item) {
@@ -34,7 +41,13 @@ export default class Sidebar extends React.Component {
 
   handleViewMyPage() {
     AppLocator.context.useCase(ViewMyPageUseCase.create()).execute().catch(err => {
-      if (err === 'notlogin') ipcRenderer.send('RequestOpenLoginModal', Number(window.location.hash.replace('#', '')));
+      if (err === 'notlogin') ipcRenderer.send('RequestOpenLoginModal', this.windowId);
+    });
+  }
+
+  handleViewRanking(mode) {
+    AppLocator.context.useCase(ViewRankingUseCase.create()).execute(mode).catch(err => {
+      if (err === 'notlogin') ipcRenderer.send('RequestOpenLoginModal', this.windowId);
     });
   }
 
@@ -47,7 +60,7 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
-    const {searchBox} = this.props;
+    const {searchBox, favorite} = this.props;
 
     return (
       <div className={styles.container}>
@@ -58,11 +71,28 @@ export default class Sidebar extends React.Component {
           {searchBox.mode === 'my' ? (<span className={styles.menuBorder} />) : null}
           <span>マイページ</span>
         </div>
-        <div className={styles.menuHeader}>キーワード</div>
+        <div className={styles.menuHeader}>ランキング</div>
+        <ul className={styles.list}>
+          <li
+            className={searchBox.mode === 'user_ranking' ? styles.selectedItem :  styles.item}
+            onClick={() => ::this.handleViewRanking('user')}
+          >
+            {searchBox.mode === 'user_ranking' ? (<span className={styles.itemBorder} />) : null}
+            <span>ユーザー</span>
+          </li>
+          <li
+            className={searchBox.mode === 'official_ranking' ? styles.selectedItem :  styles.item}
+            onClick={() => ::this.handleViewRanking('official')}
+          >
+            {searchBox.mode === 'official_ranking' ? (<span className={styles.itemBorder} />) : null}
+            <span>公式＆ＣＨ</span>
+          </li>
+        </ul>
+        {favorite.items.filter(item => item.type === 'word').length > 0 ? (<div className={styles.menuHeader}>キーワード</div>) : null}
         <ul className={styles.list}>
           {this.renderItems('word')}
         </ul>
-        <div className={styles.menuHeader}>タグ</div>
+        {favorite.items.filter(item => item.type === 'tag').length > 0 ? (<div className={styles.menuHeader}>タグ</div>) : null}
         <ul className={styles.list}>
           {this.renderItems('tag')}
         </ul>
