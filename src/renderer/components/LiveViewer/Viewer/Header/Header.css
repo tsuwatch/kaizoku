@@ -1,6 +1,5 @@
 .webviewHeader {
   position: fixed;
-  left: 540px;
   right: 0;
   padding: 5px;
   display: flex;
@@ -17,6 +16,20 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 5px;
+}
+
+.button {
+  margin-right: 10px;
+  transition-duration: .1s;
+}
+
+.button:hover {
+  color: #ffa350;
+  -webkit-transform: scale(1.1);
+}
+
+.fill {
+  color: #ffa350;
 }
 
 .tag {

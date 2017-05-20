@@ -8,6 +8,7 @@ import styles from './Sidebar.css';
 
 export default class Sidebar extends React.Component {
   static propTypes = {
+    isFullscreen: React.PropTypes.bool.isRequired,
     searchBox: React.PropTypes.object.isRequired,
     favorite: React.PropTypes.object.isRequired
   }
@@ -63,7 +64,10 @@ export default class Sidebar extends React.Component {
     const {searchBox, favorite} = this.props;
 
     return (
-      <div className={styles.container}>
+      <div
+        style={{display: `${this.props.isFullscreen ? 'none' : ''}`}}
+        className={styles.container}
+      >
         <div
           className={searchBox.mode === 'my' ? styles.selectedMenu : styles.menu}
           onClick={::this.handleViewMyPage}

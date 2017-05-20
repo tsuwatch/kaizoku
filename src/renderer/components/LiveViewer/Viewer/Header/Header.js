@@ -4,9 +4,11 @@ import fa from 'font-awesome/css/font-awesome.css';
 import styles from './Header.css';
 import AppLocator from '../../../../AppLocator';
 import SearchLiveUseCase from '../../../../use-cases/SearchLiveUseCase';
+import ToggleFullscreenUseCase from '../../../../use-cases/ToggleFullscreenUseCase';
 
 export default class Header extends React.Component {
   static propTypes = {
+    isFullscreen: React.PropTypes.bool.isRequired,
     item: React.PropTypes.object.isRequired
   };
 
@@ -29,6 +31,10 @@ export default class Header extends React.Component {
     })
   }
 
+  toggleFullscreen() {
+    AppLocator.context.useCase(ToggleFullscreenUseCase.create()).execute();
+  }
+
   renderTags() {
     return this.props.item.tags.split(/\s/).map((tag, i) => {
       return (
@@ -44,12 +50,19 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const {item} = this.props;
+    const {item, isFullscreen} = this.props;
     const {isExpandedDescription} = this.state;
 
     return (
-      <div className={styles.webviewHeader}>
+      <div
+        style={{left: `${isFullscreen ? 0 : '540px'}`}}
+        className={styles.webviewHeader}
+      >
         <div className={styles.tagsContainer}>
+          <i
+            className={`${fa.fa} ${fa['fa-window-maximize']} ${styles.button} ${isFullscreen ? styles.fill : null}`}
+            onClick={::this.toggleFullscreen}
+          />
           <i className={`${fa.fa} ${fa['fa-tags']}`} />
           {this.renderTags()}
         </div>
