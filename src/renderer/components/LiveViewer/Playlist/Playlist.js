@@ -4,6 +4,7 @@ import styles from './Playlist.css';
 
 export default class Playlist extends React.Component {
   static propTypes = {
+    isFullscreen: React.PropTypes.bool.isRequired,
     playlist: React.PropTypes.object.isRequired
   };
 
@@ -28,7 +29,10 @@ export default class Playlist extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div
+        style={{display: `${this.props.isFullscreen ? 'none' : ''}`}}
+        className={styles.container}
+      >
         <ul className={styles.playlistContent}>
           {this.renderItems()}
         </ul>

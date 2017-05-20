@@ -31,22 +31,30 @@ export default class App extends React.Component {
   }
 
   render() {
-    const {playlist, searchBox, favorite} = this.state;
+    const {application, playlist, searchBox, favorite} = this.state;
 
     return (
       <div className={styles.window}>
         <Header
           isPlaying={!!playlist.currentItemId}
+          isFullscreen={application.isFullscreen}
           searchBox={searchBox}
           favorite={favorite}
         />
         <div className={styles.container}>
           <Sidebar
+            isFullscreen={application.isFullscreen}
             favorite={favorite}
             searchBox={searchBox}
           />
-          <Playlist playlist={playlist} />
-          <Viewer item={playlist.currentItem} />
+          <Playlist
+            isFullscreen={application.isFullscreen}
+            playlist={playlist}
+          />
+          <Viewer
+            isFullscreen={application.isFullscreen}
+            item={playlist.currentItem}
+          />
         </div>
       </div>
     );

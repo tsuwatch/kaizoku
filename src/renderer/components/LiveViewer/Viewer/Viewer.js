@@ -9,6 +9,7 @@ import UpdateLiveUseCase from '../../../use-cases/UpdateLiveUseCase';
 
 export default class LiveViewer extends React.Component {
   static propTypes = {
+    isFullscreen: React.PropTypes.bool.isRequired,
     item: React.PropTypes.object
   };
 
@@ -87,18 +88,23 @@ export default class LiveViewer extends React.Component {
     }, 3000);
   }
 
-  handleMouseLeave() {
-    this.setState({isEnter: false});
-  }
-
   render() {
+    const {item, isFullscreen} = this.props;
+
     return (
       <div
+        style={{marginTop: `${isFullscreen ? '20px' : ''}`}}
         className={styles.container}
         onMouseMove={::this.handleMouseMove}
-        onMouseLeave={::this.handleMouseLeave}
       >
-        {this.props.item && this.state.isDisplayOverlay ? (<Header item={this.props.item} />) : null}
+        {
+          item && this.state.isDisplayOverlay ? (
+            <Header
+              isFullscreen={isFullscreen}
+              item={item}
+            />
+          ) : null
+        }
         <div
           id="webview"
           className={styles.webviewContainer}
