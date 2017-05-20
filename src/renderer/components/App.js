@@ -98,6 +98,7 @@ export default class App extends React.Component {
       <div>
         <label className={canAlert ? '' : styles.disabledCheckbox}>
           <input
+            className={canAlert ? '' : styles.disabledCheckbox}
             type="checkbox"
             onChange={::this.handleChangeAlert}
             disabled={!canAlert}
