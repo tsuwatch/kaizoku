@@ -1,47 +1,32 @@
 import {UseCase} from 'almin';
-import {Live} from 'niconico-search';
-import LiveFactory from '../domain/playlist/live/LiveFactory';
-import playlistRepository from '../repositories/PlaylistRepository';
+import AppLocator from '../AppLocator';
 import searchBoxRepository from '../repositories/SearchBoxRepository';
+import SearchLiveUseCase from './SearchLiveUseCase';
+import ViewMyPageUseCase from './ViewMyPageUseCase';
+import ViewRankingUseCase from './ViewRankingUseCase';
 
 export default class RefreshPlaylistUseCase extends UseCase {
   static create() {
-    return new this({playlistRepository, searchBoxRepository});
+    return new this({searchBoxRepository});
   }
 
-  constructor({playlistRepository, searchBoxRepository}) {
+  constructor({searchBoxRepository}) {
     super();
 
-    this.client = new Live('nicomentron');
-    this.playlistRepository = playlistRepository;
     this.searchBoxRepository = searchBoxRepository;
   }
 
   execute() {
-    const playlist = this.playlistRepository.lastUsed();
     const searchBox = this.searchBoxRepository.lastUsed();
-    if (!searchBox.word) return;
-
-    const options = {
-      'filters[liveStatus][0]': 'onair',
-      '_sort': searchBox.sort
-    };
-    if (searchBox.type === 'tag') options['targets'] = 'tagsExact';
-    searchBox.isRequesting = true;
-    this.searchBoxRepository.save(searchBox);
-
-    this.client.search(searchBox.word, options).then(response => {
-      const resultItems = response.data.data.map(data => {
-        return LiveFactory.createWithApiData(data);
-      });
-      const pinnedItems = playlist.items.filter(item => item.pinned === true);
-      const filteredItems = resultItems.filter(item => !pinnedItems.map(item => item.id).includes(item.id));
-      const items = [...pinnedItems, ...filteredItems];
-      if (playlist.currentItem() && !items.find(item => item.id === playlist.currentItemId)) items.unshift(playlist.currentItem());
-      playlist.items = items;
-      searchBox.isRequesting = false;
-      this.searchBoxRepository.save(searchBox);
-      this.playlistRepository.save(playlist);
-    });
+    if (searchBox.isRequesting) return;
+    if (searchBox.mode === 'search') {
+      AppLocator.context.useCase(SearchLiveUseCase.create()).execute(searchBox);
+    } else if (searchBox.mode === 'my') {
+      AppLocator.context.useCase(ViewMyPageUseCase.create()).execute();
+    } else if (searchBox.mode === 'user_ranking') {
+      AppLocator.context.useCase(ViewRankingUseCase.create()).execute('user');
+    } else if (searchBox.mode === 'official_ranking') {
+      AppLocator.context.useCase(ViewRankingUseCase.create()).execute('official');
+    }
   }
 }
