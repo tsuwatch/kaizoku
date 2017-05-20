@@ -1,4 +1,7 @@
 .webviewHeader {
+  position: fixed;
+  left: 540px;
+  right: 0;
   padding: 5px;
   display: flex;
   flex-wrap: wrap;
@@ -6,6 +9,7 @@
   color: white;
   border-bottom: 1px solid;
   border-color: #424242;
+  background-color: #252525;
 }
 
 .tagsContainer {
