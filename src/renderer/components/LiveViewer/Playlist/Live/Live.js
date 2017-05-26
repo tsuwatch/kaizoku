@@ -64,19 +64,6 @@ export default class Live extends React.Component {
     );
   }
 
-  renderPlayIcon() {
-    if (this.props.selected) return (
-      <i
-        className={this.iconClassNames()}
-        onClick={::this.handleStop}
-        onMouseEnter={() => ::this.toggleMouseOverPlay(true)}
-        onMouseLeave={() => ::this.toggleMouseOverPlay(false)}
-      />
-    );
-    if (this.state.onMouseOver) return (<i className={`${fa.fa} ${fa['fa-play']} ${styles.play}`} />);
-    return null;
-  }
-
   render() {
     const {item, selected} = this.props;
 
@@ -96,7 +83,6 @@ export default class Live extends React.Component {
               src={item.communityIcon}
               className={styles.communityIcon}
             />
-            {this.renderPlayIcon()}
           </div>
           <div className={styles.info}>
             <div className={styles.header}>
