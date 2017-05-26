@@ -24,9 +24,7 @@
 }
 
 .menuHeader {
-  height: 26px;
-  line-height: 26px;
-  margin: 5px 0;
+  font-size: 13px;
 }
 
 .selectedMenu {
