@@ -35,7 +35,8 @@ export default class App extends React.Component {
       this.setState({
         browser,
         email: '',
-        password: ''
+        password: '',
+        alert: false
       });
     } else {
       this.setState({browser: ''});
@@ -102,6 +103,7 @@ export default class App extends React.Component {
             type="checkbox"
             onChange={::this.handleChangeAlert}
             disabled={!canAlert}
+            checked={this.state.alert}
           /> 番組の開始を通知する
         </label>
       </div>
