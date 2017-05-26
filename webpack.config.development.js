@@ -7,7 +7,6 @@ import baseConfig from './webpack.config.base';
 const port = process.env.PORT || 3000;
 
 export default merge(baseConfig, {
-  debug: true,
   devtool: 'cheap-module-eval-source-map',
   entry: {
     index: './src/renderer/index',
