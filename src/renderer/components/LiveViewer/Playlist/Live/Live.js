@@ -16,8 +16,7 @@ export default class Live extends React.Component {
     super();
 
     this.state = {
-      onMouseOver: false,
-      onMouseOverPlay: false
+      onMouseOver: false
     };
   }
 
@@ -32,15 +31,6 @@ export default class Live extends React.Component {
 
   toggleMouseOver(onMouseOver) {
     this.setState({onMouseOver});
-  }
-
-  toggleMouseOverPlay(onMouseOverPlay) {
-    this.setState({onMouseOverPlay});
-  }
-
-  iconClassNames() {
-    if (this.state.onMouseOverPlay) return `${fa.fa} ${fa['fa-stop-circle']} ${styles.play}`
-    return `${fa.fa} ${fa['fa-volume-up']} ${styles.play}`;
   }
 
   renderElapsedTime() {
