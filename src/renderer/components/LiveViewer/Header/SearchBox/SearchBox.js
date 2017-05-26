@@ -64,6 +64,8 @@ export default class SearchBox extends React.Component {
   }
 
   render() {
+    const {searchBox} = this.props;
+
     return (
       <form
         className={styles.container}
@@ -98,7 +100,7 @@ export default class SearchBox extends React.Component {
           onChange={::this.handleInput}
           value={this.state.word}
         />
-        <StarIcon isStared={this.isStared()} />
+        {searchBox.mode === 'search' && searchBox.word ? (<StarIcon isStared={this.isStared()} />) : null}
       </form>
     );
   }

@@ -24,7 +24,12 @@ export default class SearchLiveUseCase extends UseCase {
     searchBox.type = type;
     searchBox.sort = sort ? sort : searchBox.sort;
     searchBox.mode = 'search';
-    if (!searchBox.word) return;
+    if (!searchBox.word) {
+      playlist.items = [];
+      this.playlistRepository.save(playlist);
+      this.searchBoxRepository.save(searchBox);
+      return;
+    }
 
     const options = {
       'filters[liveStatus][0]': 'onair',
