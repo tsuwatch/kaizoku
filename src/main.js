@@ -21,7 +21,7 @@ class Main {
         break;
     }
 
-    app.commandLine.appendSwitch('ppapi-flash-path', `${path.join(__dirname)}/../plugins/${pluginName}`);
+    app.commandLine.appendSwitch('ppapi-flash-path', `${path.join(__dirname)}/${process.env.NODE_ENV === 'development' ? '../' : ''}plugins/${pluginName}`);
     app.commandLine.appendSwitch('ppapi-flash-version', '25.0.0.127');
   }
 

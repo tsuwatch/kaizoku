@@ -5,7 +5,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import baseConfig from './webpack.config.base';
 
 export default merge(baseConfig, {
-  devtool: 'cheap-module-eval-source-map',
   entry: {
     index: './src/renderer/index.js',
     'login/index': './src/renderer/login/index.js'
