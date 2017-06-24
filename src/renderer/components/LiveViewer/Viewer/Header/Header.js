@@ -55,7 +55,7 @@ export default class Header extends React.Component {
 
     return (
       <div
-        style={{left: `${isFullscreen ? 0 : '540px'}`}}
+        style={{left: `${isFullscreen ? 0 : '510px'}`}}
         className={styles.webviewHeader}
       >
         <div className={styles.tagsContainer}>
