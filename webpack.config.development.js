@@ -24,7 +24,6 @@ export default merge(baseConfig, {
   devServer: {
     hot: true,
     port: port,
-    inline: true,
-    colors: true
+    inline: true
   }
 });
