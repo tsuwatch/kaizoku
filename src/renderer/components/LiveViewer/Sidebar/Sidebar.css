@@ -1,6 +1,5 @@
 .container {
-  width: 150px;
-  min-width: 150px;
+  min-width: 120px;
   background: #0F0F0F;
   font-family: YuGothic, Avenir, Helvetica, Meiryo;
   color: #808080;
@@ -82,7 +81,7 @@
   color: white;
   border-left: 5px solid #ffa350;
   position: absolute;
-  left: -13.5%;
+  left: -16.5%;
   padding-left: 20px;
 }
 
@@ -92,6 +91,6 @@
   color: white;
   border-left: 5px solid #ffa350;
   position: absolute;
-  left: -18%;
+  left: -23%;
   padding-left: 20px;
 }
