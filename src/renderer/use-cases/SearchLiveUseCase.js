@@ -1,23 +1,26 @@
 import {UseCase} from 'almin';
 import {Live} from 'niconico-search';
 import LiveFactory from '../domain/playlist/live/LiveFactory';
+import applicationRepository from '../repositories/ApplicationRepository';
 import playlistRepository from '../repositories/PlaylistRepository';
 import searchBoxRepository from '../repositories/SearchBoxRepository';
 
 export default class SearchLiveUseCase extends UseCase {
   static create() {
-    return new this({playlistRepository, searchBoxRepository});
+    return new this({applicationRepository, playlistRepository, searchBoxRepository});
   }
 
-  constructor({playlistRepository, searchBoxRepository}) {
+  constructor({applicationRepository, playlistRepository, searchBoxRepository}) {
     super();
 
     this.client = new Live('nicomentron');
+    this.applicationRepository = applicationRepository;
     this.playlistRepository = playlistRepository;
     this.searchBoxRepository = searchBoxRepository;
   }
 
   execute({word, type, sort} = {}) {
+    const application = this.applicationRepository.lastUsed();
     const playlist = this.playlistRepository.lastUsed();
     const searchBox = this.searchBoxRepository.lastUsed();
     searchBox.word = word;
@@ -45,9 +48,19 @@ export default class SearchLiveUseCase extends UseCase {
       });
       const filteredItems = resultItems.filter(item => !playlist.pinnedItems().map(item => item.id).includes(item.id));
       const items = [...playlist.pinnedItems(), ...filteredItems];
-      if (playlist.currentItem() && !items.find(item => item.id === playlist.currentItemId)) items.unshift(playlist.currentItem());
+      if (playlist.currentItem()) {
+        const index = items.findIndex(item => item.id === playlist.currentItemId);
+        if (index !== -1) {
+          items.splice(index, 1);
+          items.splice(index, 0, playlist.currentItem());
+        } else {
+          items.unshift(playlist.currentItem());
+        }
+      }
       playlist.items = items;
       searchBox.isRequesting = false;
+      application.commentViewer = false;
+      this.applicationRepository.save(application);
       this.searchBoxRepository.save(searchBox);
       this.playlistRepository.save(playlist);
     });

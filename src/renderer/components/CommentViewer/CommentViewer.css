@@ -1,0 +1,21 @@
+.container {
+  font-family: YuGothic, Avenir, Helvetica, Meiryo;
+  width: 510px;
+  min-width: 510px;
+  overflow: scroll;
+  background: #1d1d1d;
+  padding-top: 30px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  height: 30px;
+  width: 510px;
+  background: #0F0F0F;
+}
+
+.listWrapper {
+  margin: 0 5px;
+  overflow: scroll;
+}

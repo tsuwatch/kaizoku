@@ -3,10 +3,11 @@ import {ipcRenderer} from 'electron';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import Playlist from './Playlist/Playlist';
-import Viewer from './Viewer/Viewer';
-import AppLocator from '../../AppLocator';
-import styles from './App.css';
-import RefreshPlaylistUseCase from '../../use-cases/RefreshPlaylistUseCase';
+import LiveViewer from './LiveViewer/LiveViewer';
+import CommentViewer from './CommentViewer/CommentViewer';
+import AppLocator from '../AppLocator';
+import styles from './Main.css';
+import RefreshPlaylistUseCase from '../use-cases/RefreshPlaylistUseCase';
 
 export default class App extends React.Component {
   constructor() {
@@ -35,24 +36,31 @@ export default class App extends React.Component {
 
     return (
       <div className={styles.window}>
-        <Header
-          isPlaying={!!playlist.currentItemId}
-          isFullscreen={application.isFullscreen}
-          searchBox={searchBox}
-          favorite={favorite}
-        />
+        {
+          application.screenMode !== 'fullscreen' ? (
+            <Header
+              isPlaying={!!playlist.currentItemId}
+              searchBox={searchBox}
+              favorite={favorite}
+            />
+          ) : null
+        }
         <div className={styles.container}>
-          <Sidebar
-            isFullscreen={application.isFullscreen}
-            favorite={favorite}
-            searchBox={searchBox}
+          {
+            application.screenMode === 'playlist' ? (
+              <Sidebar
+                favorite={favorite}
+                searchBox={searchBox}
+              />
+            ) : null
+          }
+          {application.screenMode === 'playlist' ? (<Playlist playlist={playlist} />) : null}
+          <CommentViewer
+            screenMode={application.screenMode}
+            item={playlist.currentItem}
           />
-          <Playlist
-            isFullscreen={application.isFullscreen}
-            playlist={playlist}
-          />
-          <Viewer
-            isFullscreen={application.isFullscreen}
+          <LiveViewer
+            screenMode={application.screenMode}
             item={playlist.currentItem}
           />
         </div>

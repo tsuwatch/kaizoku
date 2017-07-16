@@ -1,7 +1,7 @@
 import React from 'react';
 import nicolive from 'nicolive-api';
 import {ipcRenderer} from 'electron';
-import LiveViewer from './LiveViewer/App';
+import Main from './Main';
 import AppLocator from '../AppLocator';
 import SessionExtractor from '../libraries/SessionExtractor';
 import AlertJumpUseCase from '../use-cases/AlertJumpUseCase.js';
@@ -12,7 +12,6 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      mode: 'LiveViewer',
       alert: false,
       loggedIn: false,
       email: '',
@@ -186,24 +185,13 @@ export default class App extends React.Component {
     );
   }
 
-  renderApplication() {
-    const {
-      mode,
-      loggedIn
-    } = this.state;
+  render() {
+    const {loggedIn} = this.state;
 
     if (loggedIn) {
-      if (mode === 'LiveViewer') {
-        return (<LiveViewer />)
-      }
+      return (<Main />)
     } else {
       return this.renderLogin()
     }
-  }
-
-  render() {
-    return (
-      <div>{this.renderApplication()}</div>
-    );
   }
 }

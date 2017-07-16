@@ -1,7 +1,7 @@
 import React from 'react';
 import fa from 'font-awesome/css/font-awesome.css';
-import AppLocator from '../../../../../AppLocator';
-import PinLiveUseCase from '../../../../../use-cases/PinLiveUseCase.js';
+import AppLocator from '../../../../AppLocator';
+import PinLiveUseCase from '../../../../use-cases/PinLiveUseCase.js';
 import styles from './PinIcon.css';
 
 export default class PinIcon extends React.Component {

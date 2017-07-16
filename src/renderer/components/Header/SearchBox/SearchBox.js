@@ -1,7 +1,7 @@
 import React from 'react';
 import StarIcon from './StarIcon/StarIcon';
-import AppLocator from '../../../../AppLocator';
-import SearchLiveUseCase from '../../../../use-cases/SearchLiveUseCase';
+import AppLocator from '../../../AppLocator';
+import SearchLiveUseCase from '../../../use-cases/SearchLiveUseCase';
 import styles from './SearchBox.css';
 
 export default class SearchBox extends React.Component {
@@ -21,11 +21,13 @@ export default class SearchBox extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      word: nextProps.searchBox.word,
-      type: nextProps.searchBox.type,
-      sort: nextProps.searchBox.sort
-    });
+    if (nextProps.searchBox.isRequesting) {
+      this.setState({
+        word: nextProps.searchBox.word,
+        type: nextProps.searchBox.type,
+        sort: nextProps.searchBox.sort
+      });
+    }
   }
 
   handleInput(e) {

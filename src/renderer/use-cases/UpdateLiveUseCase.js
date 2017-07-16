@@ -16,11 +16,12 @@ export default class UpdateLiveUseCase extends UseCase {
     const playlist = this.playlistRepository.lastUsed();
     const index = playlist.items.findIndex(item => item.id === id);
     const live = playlist.items[index];
-    live.title = status.title;
-    live.description = status.description;
-    live.startTime = Number(`${status.open_time}000`);
-    live.commentCounter = status.comment_count;
-    live.viewCounter = status.watch_count;
+    const stream = status.stream;
+    live.title = stream.title;
+    if (!live.description) live.description = stream.description;
+    live.startTime = Number(`${stream.open_time}000`);
+    live.commentCounter = stream.comment_count;
+    live.viewCounter = stream.watch_count;
     playlist.items[index] = live;
     this.playlistRepository.save(playlist);
   }

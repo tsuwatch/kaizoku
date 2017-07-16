@@ -2,14 +2,14 @@ import React from 'react';
 import {ipcRenderer} from 'electron';
 import NicoliveAPI from 'nicolive-api';
 import Header from './Header/Header';
-import styles from './Viewer.css';
-import AppLocator from '../../../AppLocator';
-import ControlPlayerUseCase from '../../../use-cases/ControlPlayerUseCase';
-import UpdateLiveUseCase from '../../../use-cases/UpdateLiveUseCase';
+import styles from './LiveViewer.css';
+import AppLocator from '../../AppLocator';
+import ControlPlayerUseCase from '../../use-cases/ControlPlayerUseCase';
+import UpdateLiveUseCase from '../../use-cases/UpdateLiveUseCase';
 
 export default class LiveViewer extends React.Component {
   static propTypes = {
-    isFullscreen: React.PropTypes.bool.isRequired,
+    screenMode: React.PropTypes.string.isRequired,
     item: React.PropTypes.object
   };
 
@@ -89,18 +89,18 @@ export default class LiveViewer extends React.Component {
   }
 
   render() {
-    const {item, isFullscreen} = this.props;
+    const {item, screenMode} = this.props;
 
     return (
       <div
-        style={{marginTop: `${isFullscreen ? '20px' : ''}`}}
+        style={{marginTop: `${screenMode === 'fullscreen' ? '20px' : ''}`}}
         className={styles.container}
         onMouseMove={::this.handleMouseMove}
       >
         {
           item && this.state.isDisplayOverlay ? (
             <Header
-              isFullscreen={isFullscreen}
+              screenMode={screenMode}
               item={item}
             />
           ) : null
