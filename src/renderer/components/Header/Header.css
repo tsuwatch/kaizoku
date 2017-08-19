@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  align-items: center;
+  background: #0F0F0F;
+  margin-left: 60px;
+  height: 50px;
+  -webkit-app-region: drag;
+}

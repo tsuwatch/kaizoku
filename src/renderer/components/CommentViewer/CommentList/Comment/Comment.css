@@ -1,0 +1,53 @@
+.row {
+  display: flex;
+}
+
+.room {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 3px 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(255, 255, 255, .6);
+  flex: 0 0 auto;
+}
+
+.text {
+  color: white;
+  padding: 3px 5px;
+  box-sizing: border-box;
+  word-break: break-word;
+  border-bottom: 1px solid rgba(255, 255, 255, .6);
+  flex: 0 0 auto;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 3px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(255, 255, 255, .6);
+  flex: 0 0 auto;
+}
+
+.id {
+  font-size: 10px;
+  margin-right: 5px;
+  padding: 3px;
+  width: 13px;
+  height: 13px;
+  border-radius: 13px;
+  text-align: center;
+  background: #23cf21;
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: underline;
+}

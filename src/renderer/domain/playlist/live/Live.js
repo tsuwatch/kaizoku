@@ -10,7 +10,7 @@ export default class Live {
     viewCounter,
     scoreTimeshiftReserved,
     categoryTags,
-    tags
+    tags,
   } = {}) {
     this.id = id;
     this.title = title;
@@ -23,6 +23,8 @@ export default class Live {
     this.scoreTimeshiftReserved = scoreTimeshiftReserved;
     this.categoryTags = categoryTags;
     this.tags = tags;
+    this.comments = [];
+    this.firstComments = {};
     this.url = `http://live.nicovideo.jp/watch/${this.id}`;
     this.pinned = false;
   }
