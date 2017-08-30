@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./src",
-    "package": "NODE_ENV=production ./node_modules/.bin/electron-packager ./app nicomentron --platform=darwin --arch=x64 --out=packages --overwrite --asar",
-    "prepackage": "cp package.json ./app && cp -r plugins ./app && cd ./app && rm -rf node_modules && npm install --production && ../node_modules/.bin/electron-rebuild -m . sqlite3 keytar",
+    "package": "NODE_ENV=production ./node_modules/.bin/electron-packager ./app nicomentron --platform=darwin --arch=x64 --out=packages --overwrite --asar.unpack=**/PepperFlashPlayer.plugin/**",
+    "prepackage": "npm run build && cp package*.json ./app && cp -r plugins ./app && cd ./app && rm -rf node_modules && npm install --production && ../node_modules/.bin/electron-rebuild -m . sqlite3 keytar",
     "zip": "cd packages && zip -r nicomentron-darwin-x64.zip nicomentron-darwin-x64",
     "electron-rebuild": "./node_modules/.bin/electron-rebuild sqlite3 keytar",
     "build": "rm -rf ./app/* && npm run build:main && npm run build:renderer && cp package.json ./app && cp -r plugins ./app",
