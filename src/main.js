@@ -21,7 +21,7 @@ class Main {
         break;
     }
 
-    const pluginDir = path.join(app.getAppPath(), 'plugins').replace('app.asar', 'app.asar.unpacked');
+    const pluginDir = path.join(__dirname, process.env.NODE_ENV === 'development' ? '../' : '', 'plugins').replace('app.asar', 'app.asar.unpacked');
     app.commandLine.appendSwitch('ppapi-flash-path', path.join(pluginDir, pluginName));
     app.commandLine.appendSwitch('ppapi-flash-version', '25.0.0.127');
   }
