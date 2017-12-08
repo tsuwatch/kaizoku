@@ -50,7 +50,7 @@ export default class App extends React.Component {
     event.preventDefault();
 
     if (this.state.browser) {
-      const sessionExtractor = new SessionExtractor();
+      const sessionExtractor = new SessionExtractor(this.state.browser);
 
       sessionExtractor.extract()
         .then(sessionId => {
