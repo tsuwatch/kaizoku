@@ -11,7 +11,7 @@ export default class MainWindow {
       titleBarStyle: 'hidden',
       backgroundColor: '#252525',
       minWidth: 600,
-      minHeight: 400,
+      minHeight: 600,
       webPreferences: {
         plugins: true
       },

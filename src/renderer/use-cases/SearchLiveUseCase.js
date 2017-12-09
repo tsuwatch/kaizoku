@@ -13,7 +13,7 @@ export default class SearchLiveUseCase extends UseCase {
   constructor({applicationRepository, playlistRepository, searchBoxRepository}) {
     super();
 
-    this.client = new Live('nicomentron');
+    this.client = new Live('Kaizoku');
     this.applicationRepository = applicationRepository;
     this.playlistRepository = playlistRepository;
     this.searchBoxRepository = searchBoxRepository;
