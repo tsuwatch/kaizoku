@@ -1,7 +1,8 @@
 .window {
   font-family: YuGothic, Avenir, Helvetica, Meiryo;
+  font-size: 14px;
   position: absolute;
-  background-color: #252525;
+  background: linear-gradient(#252525, #151515);
   top: 0;
   right: 0;
   bottom: 0;
@@ -17,7 +18,12 @@
   text-align: center;
 }
 
+.logo {
+  width: 300px;
+}
+
 .form {
+  margin-top: 50px;
 }
 
 .formGroup {
@@ -86,13 +92,79 @@
   border-radius: 4px;
 }
 
-.disabledCheckbox {
+.alertWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alertWrapperDisabled {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: .7;
+}
+
+.checkboxWrapper {
+  display: flex;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+  width: 40px;
+  height: 20px;
+  border-radius: 20px;
+  background: black;
+  border: 1px solid gray;
+  margin: 0;
+  outline: none;
+  transition: all .25s;
+  margin-left: 50px;
+}
+
+.checkbox:checked {
+  background: #ffa350;
+  border: none;
+}
+
+.checkbox:disabled {
   cursor: not-allowed;
+}
+
+.toggleFalse {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: white;
+  left: -40px;
+}
+
+.toggleDisabled {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: white;
+  left: -40px;
+  cursor: not-allowed;
+}
+
+.toggleTrue {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 20px;
+  left: -20px;
 }
 
 .button {
   outline: none;
-  margin-top: 10px;
+  margin-top: 30px;
   border-radius: 16px;
   padding: 8px 36px;
   font-size: 12px;

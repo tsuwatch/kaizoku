@@ -5,6 +5,7 @@ import Main from './Main';
 import AppLocator from '../AppLocator';
 import SessionExtractor from '../libraries/SessionExtractor';
 import AlertJumpUseCase from '../use-cases/AlertJumpUseCase.js';
+import Logo from './Logo.png';
 import styles from './App.css';
 
 export default class App extends React.Component {
@@ -95,16 +96,22 @@ export default class App extends React.Component {
     const canAlert = !browser;
 
     return (
-      <div>
-        <label className={canAlert ? '' : styles.disabledCheckbox}>
+      <div className={canAlert ? styles.alertWrapper : styles.alertWrapperDisabled}>
+        <span>番組の開始を通知する</span>
+        <div className={styles.checkboxWrapper}>
           <input
-            className={canAlert ? '' : styles.disabledCheckbox}
+            id="alert-toggle"
+            className={styles.checkbox}
             type="checkbox"
             onChange={::this.handleChangeAlert}
             disabled={!canAlert}
             checked={this.state.alert}
-          /> 番組の開始を通知する
-        </label>
+          />
+          <label
+            htmlFor="alert-toggle"
+            className={canAlert ? (this.state.alert ? styles.toggleTrue : styles.toggleFalse) : styles.toggleDisabled}
+          />
+        </div>
       </div>
     );
   }
@@ -142,6 +149,10 @@ export default class App extends React.Component {
     return (
       <div className={styles.window}>
         <div className={styles.container}>
+          <img
+            src={Logo}
+            className={styles.logo}
+          />
           <form
             className={styles.form}
             onSubmit={::this.handleSubmit}

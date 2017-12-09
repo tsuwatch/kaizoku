@@ -1,4 +1,4 @@
-# Nicomentron
+# Kaizoku
 ニコニコ生放送デスクトップクライアント（ニコニコ生放送ビューア兼、コメントビューア）
 
 - [Download preview version for Mac](https://github.com/tsuwatch/nicomentron/releases/download/v0.5.0/nicomentron-darwin-x64.zip)
