@@ -5,15 +5,13 @@ import keytar from 'keytar';
 import crypto from 'crypto';
 
 export default class SessionExtractor {
-  constructor() {
-    const dbPathBase = path.resolve(path.join(process.env.HOME, 'Library/Application Support/Google/Chrome'));
-    let dbPath = `${dbPathBase}/Default`;
-    if (!fs.statSync(dbPath).isDirectory) dbPath = `${dbPathBase}/Profile 1`;
-    this.db = new sqlite3.Database(`${dbPath}/Cookies`);
+  constructor(browser) {
+    this.browser = browser;
   }
 
   extract() {
     return new Promise((resolve, reject) => {
+      this._connect();
       this.db.serialize(() => {
         Promise.resolve()
           .then(() => {
@@ -59,5 +57,18 @@ export default class SessionExtractor {
         resolve(decipher.update(encryptedValue.slice(3)) + decipher.final());
       });
     });
+  }
+
+  _connect() {
+    const dbPathBase = path.resolve(path.join(process.env.HOME, "Library/Application Support/Google/Chrome"));
+    let dbPath = path.join(dbPathBase, 'Default');
+    try {
+      fs.statSync(dbPathBase);
+      if (!fs.statSync(dbPath).isDirectory) dbPath = `${dbPathBase}/Profile 1`;
+      fs.statSync(dbPath);
+    } catch(err) {
+      throw err;
+    }
+    this.db = new sqlite3.Database(`${dbPath}/Cookies`);
   }
 }
