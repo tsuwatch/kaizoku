@@ -25,7 +25,7 @@ export default class ApplicationMenu {
           process.env.NODE_ENV === 'development' ? {
             role: 'reload'
           } : {
-            label: 'reload',
+            label: 'Reload',
             accelerator: 'CmdOrCtrl+R',
             click() { mainWindow.webContents.send('reload') }
           },
