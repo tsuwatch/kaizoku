@@ -1,5 +1,5 @@
 {
-  "url": "https://github.com/tsuwatch/kaizoku/releases/download/v0.6.0/Kaizoku-darwin-x64.zip",
-  "name": "Kaizoku v0.6.0",
-  "notes": "v0.6.0"
+  "url": "https://github.com/tsuwatch/kaizoku/releases/download/v0.7.0/Kaizoku-darwin-x64.zip",
+  "name": "Kaizoku v0.7.0",
+  "notes": "- アプリの自動更新を実装"
 }

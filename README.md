@@ -1,8 +1,7 @@
 # Kaizoku
 ニコニコ生放送デスクトップクライアント（ニコニコ生放送ビューア兼、コメントビューア）
 
-- [Download preview version for Mac](https://github.com/tsuwatch/nicomentron/releases/download/v0.6.0/Kaizoku-darwin-x64.zip)
-  - Only live viewer
+- [Download preview version for Mac](https://github.com/tsuwatch/nicomentron/releases/download/v0.7.0/Kaizoku-darwin-x64.zip)
 
 ![](/screenshots/preview.png)
 ![](/screenshots/preview2.png)
