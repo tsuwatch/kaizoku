@@ -1,0 +1,73 @@
+.btn {
+  background-color: rgba(255, 163, 80, 1);
+  border-color: rgba(255, 163, 80, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.btn:hover {
+  background-color: rgba(255, 163, 80, .8);
+  border-color: rgba(255, 163, 80, .8);
+}
+
+.project-name {
+  display: inline-block;
+}
+
+.logo {
+  width: 50%;
+}
+
+.banner-image {
+  width: 65%;
+  display: inline-block;
+  margin-bottom: -16rem;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, .2);
+  margin-top: 50px;
+}
+
+.wrapper {
+  margin-top: 10rem;
+}
+
+.container {
+  text-align: center;
+}
+
+.wrapper div:last-child {
+  border: none;
+}
+
+.content-container {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  -webkit-align-items: center;
+  padding: 70px 0;
+  border-bottom: 1px solid #eff0f1
+}
+
+.media-container {
+  width: 50%;
+}
+
+.media-container img {
+  box-shadow: 0 0 2rem rgba(0, 0, 0, .2);
+}
+
+.right {
+  margin-left: 40px;
+}
+
+.left {
+  margin-right: 40px;
+}
+
+.info-container {
+  width: 50%;
+}
+
+.info-container h2 {
+  color: #ffa350;
+}
