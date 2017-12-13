@@ -29,6 +29,7 @@ class Main {
   onReady() {
     this.application = new Application();
     this.application.launch();
+    this.application.checkUpdate();
   }
 
   onWindowAllClosed() {
