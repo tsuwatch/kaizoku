@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import {app, ipcMain, session} from 'electron';
+import {app, ipcMain, session, dialog} from 'electron';
+import GhReleases from 'electron-gh-releases';
 import MainWindow from './MainWindow';
 import ApplicationMenu from './ApplicationMenu';
 
@@ -20,6 +21,29 @@ export default class Application {
     this.mainWindow = new MainWindow();
     this.windows.set(this.mainWindow.window.id, this.mainWindow);
     new ApplicationMenu(this.mainWindow.window);
+  }
+
+  checkUpdate() {
+    const updater = new GhReleases({
+      repo: 'tsuwatch/kaizoku',
+      currentVersion: app.getVersion()
+    });
+
+    updater.check((err, status) => {
+      if (!err && status) updater.download();
+    });
+
+    updater.on('update-downloaded', () => {
+      const id = dialog.showMessageBox({
+        type: 'info',
+        buttons: ['あとで', '再起動して更新する'],
+        message: '新しいバージョンをダウンロードしました。今すぐ更新しますか？',
+        cancelId: 0
+      });
+
+      if (id === 0) return;
+      updater.install();
+    });
   }
 
   _onRequestStore(e, arg) {
