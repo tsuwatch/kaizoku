@@ -1,12 +1,24 @@
-# Kaizoku
-ニコニコ生放送デスクトップクライアント（ニコニコ生放送ビューア兼、コメントビューア）
+<div align="center">
+  <img src="./images/logo.png" width="400">
+</div>
 
-- [Download preview version for Mac](https://github.com/tsuwatch/nicomentron/releases/download/v0.7.0/Kaizoku-darwin-x64.zip)
+## Kaizokuとは
+ニコニコ生放送デスクトップクライアント（ニコニコ生放送ビューア兼、コメントビューア）です。
+
+アラートによる放送通知や、自分のフォロー中放送などさまざまな方法で放送を探すことができます。
 
 ![](/screenshots/preview.png)
 ![](/screenshots/preview2.png)
 
-### 実装状況
+## ダウンロード
+- Mac
+  - [v0.7.0](https://github.com/tsuwatch/nicomentron/releases/download/v0.7.0/Kaizoku-darwin-x64.zip)
+- Linux
+  - 対応予定
+- Windows
+  - 対応予定
+
+## 実装状況
 
 ご意見、ご要望はお気軽にIssuesなどまで
 
