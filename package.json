@@ -39,7 +39,6 @@
     "nicolive-api": "^0.7.3",
     "niconico-search": "^0.2.0",
     "react": "^15.3.2",
-    "react-data-grid": "^2.0.53",
     "react-dom": "^15.3.2",
     "request": "^2.81.0",
     "sqlite3": "^3.1.8",
