@@ -7,8 +7,8 @@
 
 アラートによる放送通知や、自分のフォロー中放送などさまざまな方法で放送を探すことができます。
 
-![](/screenshots/preview.png)
-![](/screenshots/preview2.png)
+![](/images/preview.png)
+![](/images/preview2.png)
 
 ## ダウンロード
 - Mac

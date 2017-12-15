@@ -1,3 +1,4 @@
 app
 packages
 *.zip
+docs/vendor
