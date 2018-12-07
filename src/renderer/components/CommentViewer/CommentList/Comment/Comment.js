@@ -11,25 +11,25 @@ export default class Comment extends React.Component {
   getRoomBackgroundColor(label) {
     if (/アリーナ|c[oh]/.test(label)) return '#3c49ff';
     switch (label) {
-      case '立ち見A列':
+      case '立ち見1':
         return '#ff3c37';
-      case '立ち見B列':
+      case '立ち見2':
         return '#b2ae00';
-      case '立ち見C列':
+      case '立ち見3':
         return '#24c10e';
-      case '立ち見D列':
+      case '立ち見4':
         return '#f577cd';
-      case '立ち見E列':
+      case '立ち見5':
         return '#2eb9c8';
-      case '立ち見F列':
+      case '立ち見6':
         return '#f97900';
-      case '立ち見G列':
+      case '立ち見7':
         return '#8600d8';
-      case '立ち見H列':
+      case '立ち見8':
         return '#006b42';
-      case '立ち見I列':
+      case '立ち見9':
         return '#ac1200';
-      case '立ち見J列':
+      case '立ち見10':
         return '#ababab';
       default:
         return 'black';
