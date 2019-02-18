@@ -36,7 +36,7 @@
     "font-awesome": "^4.7.0",
     "keytar": "^3.0.2",
     "lodash": "^4.17.4",
-    "nicolive-api": "^0.7.4",
+    "nicolive-api": "^0.8.0",
     "niconico-search": "^0.2.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
