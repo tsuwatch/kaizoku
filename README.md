@@ -12,7 +12,7 @@
 
 ## ダウンロード
 - Mac
-  - [v0.7.2](https://github.com/tsuwatch/nicomentron/releases/download/0.7.2/Kaizoku-darwin-x64.zip)
+  - [v0.7.3](https://github.com/tsuwatch/nicomentron/releases/download/0.7.3/Kaizoku-darwin-x64.zip)
 - Linux
   - 対応予定
 - Windows
