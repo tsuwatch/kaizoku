@@ -61,35 +61,27 @@ export default class ViewRankingUseCase extends UseCase {
   _extractRanking(mode, body) {
     const $ = cheerio.load(body);
     if (mode === 'user') {
-      const rankingVideo = $('.ranking_video');
+      const userRanking = $('.rk-RankingList-User');
+      const rankingVideo = userRanking.find('.rk-ProgramCard');
       return rankingVideo.map((i, el) => {
-        return LiveFactory.createWithRankingData(this._extractUserRanking($(el)))
+        return LiveFactory.createWithRankingData(this._extractData($(el)))
       });
     } else if (mode === 'official') {
-      const rank = $('#rank > .active');
-      return rank.children().map((i, el) => {
-        return LiveFactory.createWithRankingData(this._extractOfficialRanking($(el)))
+      const officialAndChannelRanking = $('.rk-RankingList-OfficialAndChannel');
+      const rankingVideo = officialAndChannelRanking.find('.rk-ProgramCard');
+      return rankingVideo.map((i, el) => {
+        return LiveFactory.createWithRankingData(this._extractData($(el)))
       });
     }
   }
 
-  _extractUserRanking(el) {
+  _extractData(el) {
     const data = {};
-    data['id'] = el.find('.title').attr('href').match(/lv[0-9]*/)[0];
-    data['title'] = el.find('.video_title').text();
+    data['id'] = el.find('.rk-ProgramCard_DetailTitle').attr('href').match(/lv[0-9]*/)[0];
+    data['title'] = el.find('.rk-ProgramCard_DetailTitle').text();
     data['communityIcon'] = el.find('a > img').attr('src');
-    data['commentCounter'] = el.find('.coment').text();
-    data['viewCounter'] = el.find('.audience').text();
-    return data;
-  }
-
-  _extractOfficialRanking(el) {
-    const data = {};
-    data['id'] = el.find('p > a').attr('href').match(/lv[0-9]*/)[0];
-    data['title'] = el.find('.detail > p > a').text();
-    data['communityIcon'] = el.find('a > img').attr('src');
-    data['commentCounter'] = el.find('.coment').text();
-    data['viewCounter'] = el.find('.audience').text();
+    data['commentCounter'] = el.find('.rk-ProgramCard_DetailDataCommentCount').text();
+    data['viewCounter'] = el.find('.rk-ProgramCard_DetailDataViewCount').text();
     return data;
   }
 }
