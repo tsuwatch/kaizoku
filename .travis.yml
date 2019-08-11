@@ -10,5 +10,6 @@ addons:
     packages:
       - g++-4.8
       - libgnome-keyring-dev
+      - libsecret-1-dev
 before_script:
   - npm run lint
